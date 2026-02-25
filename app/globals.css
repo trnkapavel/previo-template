@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+html {
+  position: relative;
+}
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-outfit: var(--font-outfit);
+
+  --color-primary-50: #fdf2f2;
+  --color-primary-100: #fbe5e5;
+  --color-primary-200: #f7cccc;
+  --color-primary-300: #f2b2b2;
+  --color-primary-400: #e97f7f;
+  --color-primary-500: #e04c4c;
+  --color-primary-600: #b50000;
+  --color-primary-700: #910000;
+  --color-primary-800: #740000;
+  --color-primary-900: #5e0000;
+}

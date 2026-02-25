@@ -1,0 +1,229 @@
+'use client';
+
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import {
+  ArrowRight, RefreshCw, TrendingUp, MousePointer2, ShieldCheck,
+  Key, CreditCard, BarChart3, FileDown, Clock,
+} from 'lucide-react';
+import { PmsIllustration }          from './illustrations/PmsIllustration';
+import { ChannelIllustration }       from './illustrations/ChannelIllustration';
+import { BookingIllustration }       from './illustrations/BookingIllustration';
+import { AlfredIllustration }        from './illustrations/AlfredIllustration';
+import { ReportingIllustration }     from './illustrations/ReportingIllustration';
+import { HousekeepingIllustration }  from './illustrations/HousekeepingIllustration';
+
+const ILLUSTRATIONS: Record<string, React.ReactNode> = {
+  pms:         <PmsIllustration />,
+  channel:     <ChannelIllustration />,
+  booking:     <BookingIllustration />,
+  alfred:      <AlfredIllustration />,
+  reporting:   <ReportingIllustration />,
+  housekeeping:<HousekeepingIllustration />,
+};
+
+const products = [
+  {
+    id: 'pms',
+    title: 'Recepční systém PMS',
+    description: 'Kompletní správa recepce. Přehledná plachta pokojů, rychlý check-in/out a správa hostů na jednom místě.',
+    features: [
+      {
+        title: 'Automatická synchronizace',
+        text: 'Aktualizace dostupnosti a cen probíhá okamžitě napříč všemi platformami.',
+        icon: RefreshCw,
+      },
+      {
+        title: 'Maximalizace tržeb',
+        text: 'Optimální vytížení díky propojení s 5+ hlavními rezervačními portály.',
+        icon: TrendingUp,
+      },
+    ],
+    accent: 'text-primary-600',
+  },
+  {
+    id: 'channel',
+    title: 'Channel Manager nové generace',
+    description: 'Synchronizace s Booking.com, Expedia a 300+ dalšími portály v reálném čase. Žádné overbooky.',
+    features: [
+      {
+        title: 'Automatická synchronizace',
+        text: 'Aktualizace dostupnosti a cen probíhá okamžitě napříč všemi platformami.',
+        icon: RefreshCw,
+      },
+      {
+        title: 'Maximalizace tržeb',
+        text: 'Optimální vytížení díky propojení s 5+ hlavními rezervačními portály.',
+        icon: TrendingUp,
+      },
+    ],
+    accent: 'text-indigo-600',
+  },
+  {
+    id: 'booking',
+    title: 'Rezervační systém',
+    description: 'Proměňte návštěvníky webu na zákazníky vlastním rezervačním systémem integrovaným přímo do vašeho webu.',
+    features: [
+      {
+        title: 'Minimalizujte počet nedokončených',
+        text: 'Minimalizuje počet nedokončených rezervací díky přehledným krokům a jasným cenám.',
+        icon: MousePointer2,
+      },
+      {
+        title: 'Kontrola kvality',
+        text: 'Multi-jazyčná podpora a detailní reporty o stavu každého pokoje.',
+        icon: ShieldCheck,
+      },
+    ],
+    accent: 'text-blue-600',
+  },
+  {
+    id: 'alfred',
+    title: 'Alfred, moderní správa vašeho hotelu',
+    description: 'Digitální asistent pro moderní hotely. Od klíčů po platby — vše z jednoho místa.',
+    features: [
+      {
+        title: 'Digitální klíče',
+        text: 'Hosté otevírají dveře chytrým telefonem bez nutnosti fyzické karty.',
+        icon: Key,
+      },
+      {
+        title: 'Online platby',
+        text: 'Bezpečné zpracování plateb přímo v aplikaci. Podpora Apple Pay a Google Pay.',
+        icon: CreditCard,
+      },
+    ],
+    accent: 'text-emerald-600',
+  },
+  {
+    id: 'reporting',
+    title: 'Přehledy a analytika',
+    description: 'Řiďte svůj hotel na základě dat. Přehledné reporty a analytika v reálném čase na jednom místě.',
+    features: [
+      {
+        title: 'Přehled tržeb v reálném čase',
+        text: 'Sledujte obsazenost, průměrné ceny a výnosy přehledně na jednom místě.',
+        icon: BarChart3,
+      },
+      {
+        title: 'Exporty a sdílení',
+        text: 'Generujte reporty pro majitele nebo účetní jedním kliknutím.',
+        icon: FileDown,
+      },
+    ],
+    accent: 'text-amber-600',
+  },
+  {
+    id: 'housekeeping',
+    title: 'Inteligentní správa úklidu',
+    description: 'Mobilní aplikace pro pokojské s real-time přehledem o stavu a průběhu úklidu každého pokoje.',
+    features: [
+      {
+        title: 'Plánování v reálném čase',
+        text: 'Automatické přiřazování úkolů a sledování průběhu úklidu jednotlivých pokojů.',
+        icon: Clock,
+      },
+      {
+        title: 'Kontrola kvality',
+        text: 'Multi-jazyčná podpora a detailní reporty o stavu každého pokoje.',
+        icon: ShieldCheck,
+      },
+    ],
+    accent: 'text-rose-600',
+  },
+];
+
+export function ProductCards() {
+  return (
+    <section className="py-24 md:pb-64 bg-slate-50 relative" id="produkty">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-5xl font-bold font-outfit text-slate-900 mb-6"
+          >
+            Vše pod kontrolou. Od první rezervace až po spokojený odjezd.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-slate-600"
+          >
+            Komplexní řešení pro hotely, penziony i apartmány. Vše v jednom balení, které se přizpůsobí vašim potřebám.
+          </motion.p>
+        </div>
+
+        <div className="relative">
+          {products.map((product, index) => (
+            <ProductCard key={product.id} product={product} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProductCard({ product, index }: { product: typeof products[0]; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'start start'],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+
+  return (
+    <div
+      ref={cardRef}
+      className="relative sticky mb-0"
+      style={{ top: '72px', zIndex: index + 1, minHeight: '600px' }}
+    >
+      <motion.div
+        style={{ scale }}
+        className="relative overflow-hidden rounded-3xl border border-slate-200 shadow-xl bg-white p-6 md:p-12 lg:p-16 h-full"
+      >
+        <div className="grid lg:grid-cols-2 gap-12 items-center h-full">
+          {/* Content */}
+          <div className="order-2 lg:order-1">
+            <div className="mb-8">
+              <h3 className="text-sm uppercase tracking-widest font-bold text-primary-600 mb-4">
+                {product.title}
+              </h3>
+              <h4 className="text-3xl md:text-4xl font-bold font-outfit text-slate-900 mb-6">
+                {product.description}
+              </h4>
+            </div>
+
+            <div className="space-y-8 mb-10">
+              {product.features.map((feature, fIdx) => (
+                <div key={fIdx} className="flex gap-4 group/feature">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/feature:bg-white group-hover/feature:shadow-md transition-all">
+                    <feature.icon className={`w-6 h-6 ${product.accent}`} />
+                  </div>
+                  <div>
+                    <h5 className="text-lg font-bold text-slate-900 mb-1">{feature.title}</h5>
+                    <p className="text-slate-600 leading-relaxed">{feature.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button className="px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center gap-2 group">
+              Zjistit více
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+
+          {/* Illustration */}
+          <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center p-4">
+            {ILLUSTRATIONS[product.id]}
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
