@@ -1,7 +1,11 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Play, CheckCircle2, Hotel, Home, Building2, UserCheck, Clock, ShieldCheck } from 'lucide-react';
+import {
+  ArrowRight, Play, CheckCircle2, Hotel, Home, Building2, UserCheck, Clock, ShieldCheck,
+  Globe, ClipboardCheck, Layers, Tag, RefreshCw, Send, Zap, Headphones, Phone,
+  Smartphone, TrendingUp, BarChart2, MessageSquare, CalendarCheck, Users,
+} from 'lucide-react';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
@@ -11,33 +15,103 @@ const slides = [
     title: "Spravujte svůj hotel, penzion i apartmány z jednoho místa",
     description: "Přidejte se k více jak 4 000 spokojeným klientům. Previo je nejpoužívanější hotelový systém v Česku.",
     buttonText: "Zjistěte více",
-    image: 'https://picsum.photos/id/10/1200/800',
+    buttonHref: "#",
+    image: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&h=800&fit=crop&auto=format',
     icons: [
       { icon: Hotel, label: "Hotely" },
       { icon: Building2, label: "Penziony" },
-      { icon: Home, label: "Apartmány" }
+      { icon: Home, label: "Apartmány" },
     ],
     overlays: [
       { title: "Obsazenost", value: "94% dnes", icon: Clock, color: "bg-primary-600" },
-      { title: "Rezervace", value: "Nová objednávka", icon: CheckCircle2, color: "bg-green-500" }
-    ]
+      { title: "Rezervace", value: "Nová objednávka", icon: CheckCircle2, color: "bg-green-500" },
+    ],
   },
   {
     badge: "Virtuální recepční Alfred",
     title: "Pořiďte si majordoma, který pracuje nonstop.",
     description: "Ulehčete své recepci automatizací check-in a check-out. Nechte webovou aplikaci Alfred pracovat za Vás.",
     buttonText: "Zjistěte více",
-    image: 'https://picsum.photos/id/20/1200/800',
+    buttonHref: "#",
+    image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=800&fit=crop&auto=format',
     icons: [
       { icon: UserCheck, label: "Self check-in" },
       { icon: ShieldCheck, label: "Bezpečné platby" },
-      { icon: Clock, label: "24/7 dostupnost" }
+      { icon: Clock, label: "24/7 dostupnost" },
     ],
     overlays: [
       { title: "Alfred", value: "Check-in dokončen", icon: UserCheck, color: "bg-blue-600" },
-      { title: "Platba", value: "Uhrazeno online", icon: ShieldCheck, color: "bg-indigo-600" }
-    ]
-  }
+      { title: "Platba", value: "Uhrazeno online", icon: ShieldCheck, color: "bg-indigo-600" },
+    ],
+  },
+  {
+    badge: "Weby pro hotely",
+    title: "Zvyšte přímé rezervace z vlastního webu",
+    description: "Rychlý web a rezervační systém, který hostům nekomplikuje cestu. Vyšší konverze, méně provizí.",
+    buttonText: "Zjistěte více",
+    buttonHref: "#",
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&auto=format',
+    icons: [
+      { icon: Globe, label: "Vlastní web" },
+      { icon: Smartphone, label: "Mobilní rezervace" },
+      { icon: TrendingUp, label: "Vyšší konverze" },
+    ],
+    overlays: [
+      { title: "Rezervace", value: "Přímá rezervace potvrzena", icon: ClipboardCheck, color: "bg-green-600" },
+      { title: "Web", value: "Dostupnost ověřena online", icon: Globe, color: "bg-primary-600" },
+    ],
+  },
+  {
+    badge: "Channel manager",
+    title: "Mějte ceny a dostupnost pod kontrolou všude",
+    description: "Napojte prodejní kanály do jednoho místa a spravujte ceníky i restrikce bez přepisování. Méně chyb, méně overbookingu.",
+    buttonText: "Zjistěte více",
+    buttonHref: "#",
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&auto=format',
+    icons: [
+      { icon: Layers, label: "Více kanálů" },
+      { icon: BarChart2, label: "Přehled cen" },
+      { icon: RefreshCw, label: "Synchronizace" },
+    ],
+    overlays: [
+      { title: "Kanály", value: "Dostupnost synchronizována", icon: Layers, color: "bg-violet-600" },
+      { title: "Ceník", value: "Ceny aktualizovány všude", icon: Tag, color: "bg-primary-600" },
+    ],
+  },
+  {
+    badge: "Automatizace hotelů",
+    title: "Uvolněte recepci díky automatizaci",
+    description: "Zautomatizujte rutiny, které berou čas: komunikaci, platby, check-in i doklady. Vy se soustředíte na hosty, ne na tabulky.",
+    buttonText: "Zjistěte více",
+    buttonHref: "#",
+    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=800&fit=crop&auto=format',
+    icons: [
+      { icon: Zap, label: "Automatizace" },
+      { icon: MessageSquare, label: "Komunikace" },
+      { icon: CalendarCheck, label: "Check-in" },
+    ],
+    overlays: [
+      { title: "Komunikace", value: "Instrukce odeslány automaticky", icon: Send, color: "bg-amber-500" },
+      { title: "Provoz", value: "Méně ručních kroků", icon: Zap, color: "bg-primary-600" },
+    ],
+  },
+  {
+    badge: "Klientská linka",
+    title: "Podpora, na kterou se dá spolehnout",
+    description: "Jsme k dispozici 7 dní v týdnu. Když hoří provoz, potřebujete rychlou odpověď a člověka, který zná hotely.",
+    buttonText: "+420 251 613 924",
+    buttonHref: "tel:+420251613924",
+    image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1200&h=800&fit=crop&auto=format',
+    icons: [
+      { icon: Headphones, label: "7/7 podpora" },
+      { icon: Phone, label: "Telefon" },
+      { icon: Users, label: "Odborníci" },
+    ],
+    overlays: [
+      { title: "Podpora", value: "K dispozici 7 dní v týdnu", icon: Headphones, color: "bg-teal-600" },
+      { title: "Telefon", value: "Zavolejte a vyřešíme to", icon: Phone, color: "bg-primary-600" },
+    ],
+  },
 ];
 
 export function Hero() {
@@ -50,11 +124,13 @@ export function Hero() {
     return () => clearInterval(timer);
   }, []);
 
+  const slide = slides[currentSlide];
+
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
       {/* Background Elements & Shapes */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white"></div>
-      
+
       {/* Subtle Background Shapes */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none opacity-20">
         <div className="absolute top-[10%] left-[5%] w-64 h-64 border border-primary-200 rounded-full"></div>
@@ -81,22 +157,25 @@ export function Hero() {
               >
                 <div className="inline-flex items-center gap-2 text-slate-400 text-sm font-medium mb-8">
                   <ArrowRight className="w-4 h-4 text-slate-300" />
-                  <span className="text-primary-700">{slides[currentSlide].badge}</span>
+                  <span className="text-primary-700">{slide.badge}</span>
                 </div>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-outfit tracking-tight text-slate-900 mb-6 leading-[1.1]">
-                  {slides[currentSlide].title}
+                  {slide.title}
                 </h1>
 
                 <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-xl leading-relaxed">
-                  {slides[currentSlide].description}
+                  {slide.description}
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <button className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center justify-center gap-2 group">
-                    {slides[currentSlide].buttonText}
+                  <a
+                    href={slide.buttonHref}
+                    className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center justify-center gap-2 group"
+                  >
+                    {slide.buttonText}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </a>
                   <button className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-[3px] font-medium text-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group">
                     <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
                       <Play className="w-3 h-3 text-slate-600 group-hover:text-primary-600" fill="currentColor" />
@@ -107,7 +186,7 @@ export function Hero() {
 
                 {/* SVG Animations / Icons */}
                 <div className="mt-12 flex flex-wrap gap-6">
-                  {slides[currentSlide].icons.map((item, idx) => (
+                  {slide.icons.map((item, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-slate-500 text-sm font-medium">
                       <div className="p-2 bg-white rounded-[3px] border border-slate-100 shadow-sm">
                         <item.icon className="w-4 h-4 text-primary-600" />
@@ -150,9 +229,11 @@ export function Hero() {
                   className="absolute inset-0"
                 >
                   <Image
-                    src={slides[currentSlide].image}
-                    alt={slides[currentSlide].title}
+                    src={slide.image}
+                    alt={slide.title}
                     fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
                     referrerPolicy="no-referrer"
                   />
@@ -170,7 +251,7 @@ export function Hero() {
                   exit={{ opacity: 0 }}
                   className="absolute inset-0"
                 >
-                  {slides[currentSlide].overlays.map((overlay, idx) => (
+                  {slide.overlays.map((overlay, idx) => (
                     <motion.div
                       key={idx}
                       initial={{ opacity: 0, x: idx === 0 ? 20 : -20 }}
