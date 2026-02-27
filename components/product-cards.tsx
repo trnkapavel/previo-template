@@ -1,7 +1,7 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import {
   ArrowRight, RefreshCw, TrendingUp, MousePointer2, ShieldCheck,
   Key, CreditCard, BarChart3, FileDown, Clock,
@@ -175,12 +175,27 @@ export function ProductCards() {
 
 function ProductCard({ product, index }: { product: typeof products[0]; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const [isLg, setIsLg] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    setIsLg(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsLg(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ['start end', 'start start'],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isLg && !prefersReducedMotion ? [1, 0.95] : [1, 1],
+  );
 
   return (
     <div
@@ -189,7 +204,7 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
       style={{ top: '72px', zIndex: index + 1 }}
     >
       <motion.div
-        style={{ scale }}
+        style={{ scale, willChange: 'transform' }}
         className="relative overflow-hidden rounded-3xl border border-slate-200 shadow-md bg-white p-6 md:p-12 lg:p-16 lg:h-full"
       >
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:h-full">
