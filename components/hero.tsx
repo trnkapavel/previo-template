@@ -9,6 +9,16 @@ import {
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
+type Overlay = {
+  title: string;
+  value: string;
+  icon: React.ElementType;
+  color: string;
+  position: string;
+  initialX: number;
+  initialY: number;
+};
+
 const slides = [
   {
     badge: "Hotelový systém",
@@ -23,9 +33,11 @@ const slides = [
       { icon: Home, label: "Apartmány" },
     ],
     overlays: [
-      { title: "Obsazenost", value: "94% dnes", icon: Clock, color: "bg-primary-600" },
-      { title: "Rezervace", value: "Nová objednávka", icon: CheckCircle2, color: "bg-green-500" },
-    ],
+      { title: "Obsazenost", value: "94% dnes", icon: Clock, color: "bg-primary-600",
+        position: "-top-6 -right-6", initialX: 24, initialY: 0 },
+      { title: "Rezervace", value: "Nová objednávka", icon: CheckCircle2, color: "bg-green-500",
+        position: "-bottom-6 -left-6", initialX: -24, initialY: 0 },
+    ] as Overlay[],
   },
   {
     badge: "Virtuální recepční Alfred",
@@ -40,9 +52,11 @@ const slides = [
       { icon: Clock, label: "24/7 dostupnost" },
     ],
     overlays: [
-      { title: "Alfred", value: "Check-in dokončen", icon: UserCheck, color: "bg-blue-600" },
-      { title: "Platba", value: "Uhrazeno online", icon: ShieldCheck, color: "bg-indigo-600" },
-    ],
+      { title: "Alfred", value: "Check-in dokončen", icon: UserCheck, color: "bg-blue-600",
+        position: "-top-6 -left-6", initialX: -24, initialY: 0 },
+      { title: "Platba", value: "Uhrazeno online", icon: ShieldCheck, color: "bg-indigo-600",
+        position: "-bottom-6 -right-6", initialX: 24, initialY: 0 },
+    ] as Overlay[],
   },
   {
     badge: "Weby pro hotely",
@@ -57,9 +71,11 @@ const slides = [
       { icon: TrendingUp, label: "Vyšší konverze" },
     ],
     overlays: [
-      { title: "Rezervace", value: "Přímá rezervace potvrzena", icon: ClipboardCheck, color: "bg-green-600" },
-      { title: "Web", value: "Dostupnost ověřena online", icon: Globe, color: "bg-primary-600" },
-    ],
+      { title: "Rezervace", value: "Přímá rezervace potvrzena", icon: ClipboardCheck, color: "bg-green-600",
+        position: "-top-6 -right-6", initialX: 24, initialY: 0 },
+      { title: "Web", value: "Dostupnost ověřena online", icon: Globe, color: "bg-primary-600",
+        position: "-bottom-6 -left-6", initialX: -24, initialY: 0 },
+    ] as Overlay[],
   },
   {
     badge: "Channel manager",
@@ -74,9 +90,11 @@ const slides = [
       { icon: RefreshCw, label: "Synchronizace" },
     ],
     overlays: [
-      { title: "Kanály", value: "Dostupnost synchronizována", icon: Layers, color: "bg-violet-600" },
-      { title: "Ceník", value: "Ceny aktualizovány všude", icon: Tag, color: "bg-primary-600" },
-    ],
+      { title: "Kanály", value: "Dostupnost synchronizována", icon: Layers, color: "bg-violet-600",
+        position: "-bottom-6 -right-6", initialX: 24, initialY: 0 },
+      { title: "Ceník", value: "Ceny aktualizovány všude", icon: Tag, color: "bg-primary-600",
+        position: "-top-6 -left-6", initialX: -24, initialY: 0 },
+    ] as Overlay[],
   },
   {
     badge: "Automatizace hotelů",
@@ -84,16 +102,19 @@ const slides = [
     description: "Zautomatizujte rutiny, které berou čas: komunikaci, platby, check-in i doklady. Vy se soustředíte na hosty, ne na tabulky.",
     buttonText: "Zjistěte více",
     buttonHref: "#",
-    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=800&fit=crop&auto=format',
+    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=800&fit=crop&auto=format',
+    objectPosition: 'center 30%',
     icons: [
       { icon: Zap, label: "Automatizace" },
       { icon: MessageSquare, label: "Komunikace" },
       { icon: CalendarCheck, label: "Check-in" },
     ],
     overlays: [
-      { title: "Komunikace", value: "Instrukce odeslány automaticky", icon: Send, color: "bg-amber-500" },
-      { title: "Provoz", value: "Méně ručních kroků", icon: Zap, color: "bg-primary-600" },
-    ],
+      { title: "Komunikace", value: "Instrukce odeslány automaticky", icon: Send, color: "bg-amber-500",
+        position: "-top-6 -right-6", initialX: 24, initialY: 0 },
+      { title: "Provoz", value: "Méně ručních kroků", icon: Zap, color: "bg-primary-600",
+        position: "-bottom-6 -left-6", initialX: -24, initialY: 0 },
+    ] as Overlay[],
   },
   {
     badge: "Klientská linka",
@@ -108,9 +129,11 @@ const slides = [
       { icon: Users, label: "Odborníci" },
     ],
     overlays: [
-      { title: "Podpora", value: "K dispozici 7 dní v týdnu", icon: Headphones, color: "bg-teal-600" },
-      { title: "Telefon", value: "Zavolejte a vyřešíme to", icon: Phone, color: "bg-primary-600" },
-    ],
+      { title: "Podpora", value: "K dispozici 7 dní v týdnu", icon: Headphones, color: "bg-teal-600",
+        position: "-top-6 -left-6", initialX: -24, initialY: 0 },
+      { title: "Telefon", value: "Zavolejte a vyřešíme to", icon: Phone, color: "bg-primary-600",
+        position: "-bottom-6 -right-6", initialX: 24, initialY: 0 },
+    ] as Overlay[],
   },
 ];
 
@@ -218,7 +241,10 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="relative lg:h-[600px] flex items-center"
           >
-            <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-full rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
+            {/* Decorative border offset layer */}
+            <div className="absolute inset-0 translate-x-[14px] translate-y-[14px] rounded-tl-[114px] rounded-tr-[17px] rounded-bl-[17px] rounded-br-[114px] border-2 border-slate-300 z-0" />
+
+            <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-full rounded-tl-[100px] rounded-tr-[3px] rounded-bl-[3px] rounded-br-[100px] overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -235,6 +261,7 @@ export function Hero() {
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
+                    style={{ objectPosition: ('objectPosition' in slide ? slide.objectPosition : 'center') as string }}
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
@@ -254,12 +281,12 @@ export function Hero() {
                   {slide.overlays.map((overlay, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, x: idx === 0 ? 20 : -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + (idx * 0.2) }}
-                      className={`absolute ${idx === 0 ? '-top-6 -right-6' : '-bottom-6 -left-6'} bg-white p-4 rounded-2xl shadow-2xl border border-slate-100 flex items-center gap-4 min-w-[220px]`}
+                      initial={{ opacity: 0, x: overlay.initialX, y: overlay.initialY }}
+                      animate={{ opacity: 1, x: 0, y: 0 }}
+                      transition={{ delay: 0.7 + idx * 0.25, duration: 0.5, ease: 'easeOut' }}
+                      className={`absolute ${overlay.position} bg-white p-4 rounded-2xl shadow-2xl border border-slate-100 flex items-center gap-4 min-w-[220px]`}
                     >
-                      <div className={`w-12 h-12 rounded-xl ${overlay.color} flex items-center justify-center shadow-inner`}>
+                      <div className={`w-12 h-12 rounded-xl ${overlay.color} flex items-center justify-center shadow-inner shrink-0`}>
                         <overlay.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
