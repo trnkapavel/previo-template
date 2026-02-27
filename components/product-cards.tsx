@@ -204,7 +204,7 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
               </h4>
             </div>
 
-            <div className="space-y-8 mb-10">
+            <div className="space-y-4 lg:space-y-8 mb-6 lg:mb-10">
               {product.features.map((feature, fIdx) => (
                 <div key={fIdx} className="flex gap-4 group/feature">
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/feature:bg-white group-hover/feature:shadow-md transition-all">
@@ -228,7 +228,7 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
           </div>
 
           {/* Illustration */}
-          <div className="hidden lg:flex order-1 lg:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 items-center justify-center p-4">
+          <div className="order-1 lg:order-2 relative h-52 lg:h-auto lg:aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center p-4">
             {ILLUSTRATIONS[product.id]}
           </div>
         </div>
