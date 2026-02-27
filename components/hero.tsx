@@ -141,7 +141,7 @@ export function Hero() {
         </svg>
       </div>
 
-      <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-primary-100/30 rounded-full blur-3xl -z-10"></div>
+      <div className="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-primary-100/30 rounded-full blur-3xl -z-10"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -272,9 +272,9 @@ export function Hero() {
               </AnimatePresence>
             </div>
 
-            {/* Decorative background patterns */}
-            <div className="absolute -top-10 -right-10 w-64 h-64 bg-primary-100 rounded-full -z-0 blur-3xl opacity-30"></div>
-            <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-indigo-100 rounded-full -z-0 blur-3xl opacity-30"></div>
+            {/* Decorative background patterns — hidden on mobile (blur-3xl is expensive to rasterise) */}
+            <div className="hidden lg:block absolute -top-10 -right-10 w-64 h-64 bg-primary-100 rounded-full -z-0 blur-3xl opacity-30"></div>
+            <div className="hidden lg:block absolute -bottom-10 -left-10 w-80 h-80 bg-indigo-100 rounded-full -z-0 blur-3xl opacity-30"></div>
           </motion.div>
         </div>
       </div>

@@ -17,6 +17,7 @@ const portals = [
 ];
 
 // traveling dot for each portal -> center
+// Uses CSS x/y transform instead of cx/cy attribute animation — GPU composited, no SVG repaints.
 function TravelingDot({
   portal,
   isInView,
@@ -27,15 +28,13 @@ function TravelingDot({
   loopDelay: number;
 }) {
   return (
-    <motion.circle
-      r={3.5}
-      fill={portal.color}
-      initial={{ cx: portal.x, cy: portal.y, opacity: 0 }}
+    <motion.g
+      initial={{ x: portal.x, y: portal.y, opacity: 0, scale: 0.8 }}
       animate={
         isInView
           ? {
-              cx: [portal.x, CX],
-              cy: [portal.y, CY],
+              x: [portal.x, CX],
+              y: [portal.y, CY],
               opacity: [0, 1, 1, 0],
               scale: [0.8, 1, 1, 0.5],
             }
@@ -48,7 +47,9 @@ function TravelingDot({
         repeatDelay: 2.5,
         ease: 'easeInOut',
       }}
-    />
+    >
+      <circle r={3.5} fill={portal.color} />
+    </motion.g>
   );
 }
 

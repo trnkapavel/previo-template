@@ -116,9 +116,9 @@ export function StatsSection() {
         </motion.div>
       </div>
       
-      {/* Background decoration */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-primary-100/20 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-64 h-64 bg-indigo-100/20 rounded-full blur-3xl -z-10"></div>
+      {/* Background decoration — hidden on mobile (blur-3xl is expensive to rasterise) */}
+      <div className="hidden md:block absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 bg-primary-100/20 rounded-full blur-3xl -z-10"></div>
+      <div className="hidden md:block absolute top-1/2 right-0 -translate-y-1/2 w-64 h-64 bg-indigo-100/20 rounded-full blur-3xl -z-10"></div>
     </section>
   );
 }

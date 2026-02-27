@@ -1,14 +1,154 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, X, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight, ChevronDown } from 'lucide-react';
 import { PrevioLogo } from './previo-logo';
-import { useState, useEffect } from 'react';
+import { PmsIllustration } from './illustrations/PmsIllustration';
+import { AlfredIllustration } from './illustrations/AlfredIllustration';
+import { BlogIllustration } from './illustrations/BlogIllustration';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+type FeaturedCard = {
+  title: string;
+  description: string;
+  href: string;
+  gradientClass: string;
+  watermark: string;
+  illustration?: React.ReactNode;
+};
+
+type LinkItem = { label: string; href: string };
+type LinkGroup = { heading: string; links: LinkItem[] };
+
+type MegaMenuContent = {
+  type: 'mega';
+  featuredCards: FeaturedCard[];
+  groups: LinkGroup[];
+};
+
+type SimpleDropdownContent = {
+  type: 'simple';
+  links: LinkItem[];
+};
+
+type NavItem = {
+  label: string;
+  href?: string;
+  dropdown?: MegaMenuContent | SimpleDropdownContent;
+};
+
+const NAV_ITEMS: NavItem[] = [
+  {
+    label: 'Produkty',
+    dropdown: {
+      type: 'mega',
+      featuredCards: [
+        {
+          title: 'PMS',
+          description: 'Kompletní správa hotelu na jednom místě',
+          href: '/pms',
+          gradientClass: 'from-primary-600 to-primary-800',
+          watermark: 'PMS',
+          illustration: <PmsIllustration />,
+        },
+        {
+          title: 'Alfred',
+          description: 'Chytrý asistent pro vaše hosty',
+          href: '/alfred',
+          gradientClass: 'from-emerald-500 to-emerald-700',
+          watermark: 'ALF',
+          illustration: <AlfredIllustration />,
+        },
+      ],
+      groups: [
+        {
+          heading: 'Správa provozu',
+          links: [
+            { label: 'PMS', href: '/pms' },
+            { label: 'Channel Manager', href: '/channel-manager' },
+            { label: 'Booking Engine', href: '/booking-engine' },
+            { label: 'Přehled a analytika', href: '/prehled-a-analytika' },
+            { label: 'Housekeeping', href: '/housekeeping' },
+            { label: 'Revenue Management', href: '/revenue-management' },
+          ],
+        },
+        {
+          heading: 'Pro hosty',
+          links: [
+            { label: 'Alfred', href: '/alfred' },
+            { label: 'Online check-in', href: '/online-check-in' },
+            { label: 'Digitální klíč', href: '/digitalni-klic' },
+            { label: 'Guest messaging', href: '/guest-messaging' },
+          ],
+        },
+        {
+          heading: 'Ostatní',
+          links: [
+            { label: 'API a integrace', href: '/integrace' },
+            { label: 'Partnerský program', href: '/partneri' },
+          ],
+        },
+      ],
+    },
+  },
+  { label: 'Reference', href: '#reference' },
+  { label: 'Ceník', href: '#cenik' },
+  {
+    label: 'O nás',
+    dropdown: {
+      type: 'simple',
+      links: [
+        { label: 'Firemní údaje', href: '/o-nas' },
+        { label: 'Ke stažení', href: '/ke-stazeni' },
+        { label: 'Kariéra', href: '/kariera' },
+      ],
+    },
+  },
+  {
+    label: 'Akademie',
+    dropdown: {
+      type: 'mega',
+      featuredCards: [
+        {
+          title: 'Blog',
+          description: 'Tipy a trendy z hotelového světa',
+          href: '/blog',
+          gradientClass: 'from-amber-400 to-amber-600',
+          watermark: 'BLOG',
+          illustration: <BlogIllustration />,
+        },
+      ],
+      groups: [
+        {
+          heading: 'Vzdělávání',
+          links: [
+            { label: 'Akademie', href: '/akademie' },
+            { label: 'Videa', href: '/videa' },
+            { label: 'Webináře', href: '/webinare' },
+          ],
+        },
+        {
+          heading: 'Komunita',
+          links: [
+            { label: 'Blog', href: '/blog' },
+            { label: 'Případové studie', href: '/referencni-prehled' },
+            { label: 'Newsletter', href: '/newsletter' },
+            { label: 'Podpora', href: '/podpora' },
+          ],
+        },
+      ],
+    },
+  },
+  { label: 'Kontakty', href: '#kontakty' },
+  { label: 'Blog', href: '#blog' },
+];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,10 +158,30 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
+
+  const openMenu = (label: string) => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setActiveMenu(label);
+  };
+
+  const closeMenu = () => {
+    closeTimerRef.current = setTimeout(() => setActiveMenu(null), 80);
+  };
+
+  const activeMegaItem = NAV_ITEMS.find(
+    (i) => i.label === activeMenu && i.dropdown?.type === 'mega'
+  );
+
   return (
     <header
+      onMouseLeave={closeMenu}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/50 py-3' : 'bg-transparent py-5'
+        isScrolled ? 'bg-white md:bg-white/80 md:backdrop-blur-md border-b border-slate-200/50 py-3' : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,27 +193,64 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-6 ml-auto mr-8">
-            <Link href="#produkty" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              Produkty
-            </Link>
-            <Link href="#reference" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              Reference
-            </Link>
-            <Link href="#cenik" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              Ceník
-            </Link>
-            <Link href="#o-nas" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              O nás
-            </Link>
-            <Link href="#akademie" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              Akademie
-            </Link>
-            <Link href="#kontakty" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              Kontakty
-            </Link>
-            <Link href="#blog" className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
-              Blog
-            </Link>
+            {NAV_ITEMS.map((item) => {
+              const isOpen = activeMenu === item.label;
+              return (
+                <div
+                  key={item.label}
+                  className="relative"
+                  onMouseEnter={() => (item.dropdown ? openMenu(item.label) : closeMenu())}
+                >
+                  {item.href ? (
+                    <Link
+                      href={item.href}
+                      className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button className="flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+                      {item.label}
+                      {item.dropdown && (
+                        <motion.span
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.15, ease: 'easeOut' }}
+                          className="inline-flex"
+                        >
+                          <ChevronDown className="w-3.5 h-3.5" />
+                        </motion.span>
+                      )}
+                    </button>
+                  )}
+
+                  {/* Simple dropdown (O nás) */}
+                  {item.dropdown?.type === 'simple' && (
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          transition={{ duration: 0.15, ease: 'easeOut' }}
+                          className="absolute top-full left-0 mt-1 w-52 bg-white border border-slate-200 rounded-xl shadow-xl py-2 z-50"
+                          onMouseEnter={() => openMenu(item.label)}
+                        >
+                          {(item.dropdown as SimpleDropdownContent).links.map((link) => (
+                            <Link
+                              key={link.href}
+                              href={link.href}
+                              className="block text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 px-4 py-2 transition-colors"
+                            >
+                              {link.label}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+                </div>
+              );
+            })}
           </nav>
 
           {/* Desktop Actions */}
@@ -78,6 +275,82 @@ export function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Mega Menu Panels */}
+      <AnimatePresence>
+        {activeMegaItem && (
+          <motion.div
+            key={activeMenu}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            className="absolute top-full left-0 right-0 bg-white border-b border-slate-200 shadow-xl shadow-slate-200/60 z-40"
+            onMouseEnter={() => openMenu(activeMegaItem.label)}
+          >
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div className="flex gap-8">
+                {/* Featured Cards Column */}
+                <div className="w-[280px] shrink-0 flex flex-col gap-3">
+                  {(activeMegaItem.dropdown as MegaMenuContent).featuredCards.map((card) => (
+                    <Link
+                      key={card.href}
+                      href={card.href}
+                      className="group block rounded-lg overflow-hidden border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all"
+                    >
+                      {card.illustration ? (
+                        <div className="relative h-[140px] overflow-hidden bg-white">
+                          <div className="relative w-full" style={{ paddingBottom: '64%' }}>
+                            <div className="absolute inset-0">
+                              {card.illustration}
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className={`relative h-[88px] bg-gradient-to-br ${card.gradientClass} flex items-center justify-center overflow-hidden`}>
+                          <span className="absolute font-black text-[56px] text-white/10 tracking-tighter select-none leading-none">
+                            {card.watermark}
+                          </span>
+                        </div>
+                      )}
+                      <div className="px-4 py-3">
+                        <div className="text-sm font-semibold text-slate-900">{card.title}</div>
+                        <div className="text-xs text-slate-500 mt-0.5">{card.description}</div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Vertical separator */}
+                <div className="w-px bg-slate-100 shrink-0" />
+
+                {/* Link Groups */}
+                <div className="flex flex-1">
+                  {(activeMegaItem.dropdown as MegaMenuContent).groups.map((group, index, arr) => (
+                    <div
+                      key={group.heading}
+                      className={`flex-1 ${index < arr.length - 1 ? 'border-r border-slate-100 pr-6 mr-6' : ''}`}
+                    >
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3 px-2">
+                        {group.heading}
+                      </div>
+                      {group.links.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          className="block text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded px-2 py-1.5 transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Mobile Menu */}
       <AnimatePresence>
