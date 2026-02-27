@@ -204,8 +204,8 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
       style={{ top: '72px', zIndex: index + 1 }}
     >
       <motion.div
-        style={{ scale, willChange: 'transform' }}
-        className="relative overflow-hidden rounded-3xl border border-slate-200 shadow-md bg-white p-6 md:p-12 lg:p-16 lg:h-full"
+        style={{ scale, willChange: 'transform', boxShadow: '0 24px 60px -12px rgba(15, 23, 42, 0.12), 0 1px 4px rgba(15, 23, 42, 0.05)' }}
+        className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 md:p-12 lg:p-16 lg:h-full"
       >
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:h-full">
           {/* Content */}
