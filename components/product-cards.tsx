@@ -25,17 +25,18 @@ const ILLUSTRATIONS: Record<string, React.ReactNode> = {
 const products = [
   {
     id: 'pms',
+    href: '/pms',
     title: 'Recepční systém PMS',
     description: 'Kompletní správa recepce. Přehledná plachta pokojů, rychlý check-in/out a správa hostů na jednom místě.',
     features: [
       {
-        title: 'Automatická synchronizace',
-        text: 'Aktualizace dostupnosti a cen probíhá okamžitě napříč všemi platformami.',
+        title: 'Plachta pokojů v reálném čase',
+        text: 'Přehledný vizuální kalendář rezervací — vidíte okamžitě, co se děje na každém pokoji a kdy.',
         icon: RefreshCw,
       },
       {
-        title: 'Maximalizace tržeb',
-        text: 'Optimální vytížení díky propojení s 5+ hlavními rezervačními portály.',
+        title: 'Rychlý check-in a check-out',
+        text: 'Odbavte hosty za pár vteřin. Od dokladů přes přiřazení pokoje až po platbu — vše na jednom místě.',
         icon: TrendingUp,
       },
     ],
@@ -43,17 +44,18 @@ const products = [
   },
   {
     id: 'channel',
+    href: '/channel-manager',
     title: 'Channel Manager nové generace',
     description: 'Synchronizace s Booking.com, Expedia a 300+ dalšími portály v reálném čase. Žádné overbooky.',
     features: [
       {
-        title: 'Automatická synchronizace',
-        text: 'Aktualizace dostupnosti a cen probíhá okamžitě napříč všemi platformami.',
+        title: 'Synchronizace v reálném čase',
+        text: 'Dostupnost a ceny se okamžitě aktualizují na všech 300+ portálech. Bez prodlev, bez ručního zadávání.',
         icon: RefreshCw,
       },
       {
-        title: 'Maximalizace tržeb',
-        text: 'Optimální vytížení díky propojení s 5+ hlavními rezervačními portály.',
+        title: 'Nulový risk overbookingu',
+        text: 'Inteligentní správa kapacit zabrání dvojitým rezervacím i při prodeji přes desítky kanálů najednou.',
         icon: TrendingUp,
       },
     ],
@@ -61,17 +63,18 @@ const products = [
   },
   {
     id: 'booking',
+    href: '/booking-engine',
     title: 'Rezervační systém',
     description: 'Proměňte návštěvníky webu na zákazníky vlastním rezervačním systémem integrovaným přímo do vašeho webu.',
     features: [
       {
-        title: 'Minimalizujte počet nedokončených',
-        text: 'Minimalizuje počet nedokončených rezervací díky přehledným krokům a jasným cenám.',
+        title: 'Vyšší konverze návštěvníků',
+        text: 'Přehledný formulář s jasnými kroky a transparentními cenami snižuje počet opuštěných rezervací.',
         icon: MousePointer2,
       },
       {
-        title: 'Kontrola kvality',
-        text: 'Multi-jazyčná podpora a detailní reporty o stavu každého pokoje.',
+        title: 'Přímé rezervace bez provize',
+        text: 'Každá rezervace přes váš web vám ušetří 15–20 % provizi oproti OTA portálům jako Booking.com.',
         icon: ShieldCheck,
       },
     ],
@@ -79,6 +82,7 @@ const products = [
   },
   {
     id: 'alfred',
+    href: '/alfred',
     title: 'Alfred, moderní správa vašeho hotelu',
     description: 'Digitální asistent pro moderní hotely. Od klíčů po platby — vše z jednoho místa.',
     features: [
@@ -97,6 +101,7 @@ const products = [
   },
   {
     id: 'reporting',
+    href: '/prehled-a-analytika',
     title: 'Přehledy a analytika',
     description: 'Řiďte svůj hotel na základě dat. Přehledné reporty a analytika v reálném čase na jednom místě.',
     features: [
@@ -115,17 +120,18 @@ const products = [
   },
   {
     id: 'housekeeping',
+    href: '/housekeeping',
     title: 'Inteligentní správa úklidu',
     description: 'Mobilní aplikace pro pokojské s real-time přehledem o stavu a průběhu úklidu každého pokoje.',
     features: [
       {
-        title: 'Plánování v reálném čase',
-        text: 'Automatické přiřazování úkolů a sledování průběhu úklidu jednotlivých pokojů.',
+        title: 'Automatické přiřazování úkolů',
+        text: 'Systém sám rozdělí pokoje pokojským podle obsazenosti a priorit — bez ranních porad a papírových listů.',
         icon: Clock,
       },
       {
-        title: 'Kontrola kvality',
-        text: 'Multi-jazyčná podpora a detailní reporty o stavu každého pokoje.',
+        title: 'Přehled kvality v reálném čase',
+        text: 'Pokojské reportují stav pokoje přímo z mobilu. Manažer má okamžitý přehled bez telefonování.',
         icon: ShieldCheck,
       },
     ],
@@ -212,10 +218,13 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
               ))}
             </div>
 
-            <button className="px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center gap-2 group">
+            <a
+              href={product.href}
+              className="inline-flex px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 items-center gap-2 group"
+            >
               Zjistit více
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
           </div>
 
           {/* Illustration */}
