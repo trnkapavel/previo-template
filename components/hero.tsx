@@ -160,7 +160,7 @@ export function Hero() {
                   <span className="text-primary-700">{slide.badge}</span>
                 </div>
 
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-outfit tracking-tight text-slate-900 mb-6 leading-[1.1]">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-outfit tracking-tight text-slate-900 mb-6 leading-[1.1]">
                   {slide.title}
                 </h1>
 
