@@ -146,14 +146,14 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="text-left z-20 relative">
-            <AnimatePresence>
+          <div className="text-left z-20">
+            <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, position: 'absolute', top: 0, left: 0, right: 0 }}
-                transition={{ duration: 0.35 }}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, transition: { duration: 0.12 } }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="inline-flex items-center gap-2 text-slate-400 text-sm font-medium mb-8">
                   <ArrowRight className="w-4 h-4 text-slate-300" />
@@ -224,8 +224,8 @@ export function Hero() {
                   key={currentSlide}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
+                  exit={{ opacity: 0, transition: { duration: 0.4 } }}
+                  transition={{ duration: 0.55 }}
                   className="absolute inset-0"
                 >
                   <Image
@@ -248,8 +248,8 @@ export function Hero() {
                   key={currentSlide}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35 }}
+                  exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                  transition={{ duration: 0.4 }}
                   className="absolute inset-0"
                 >
                   {slide.overlays.map((overlay, idx) => (
