@@ -185,14 +185,14 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
   return (
     <div
       ref={cardRef}
-      className="relative sticky mb-0"
-      style={{ top: '72px', zIndex: index + 1, minHeight: '600px' }}
+      className="relative lg:sticky mb-0 lg:min-h-[600px]"
+      style={{ top: '72px', zIndex: index + 1 }}
     >
       <motion.div
         style={{ scale }}
-        className="relative overflow-hidden rounded-3xl border border-slate-200 shadow-xl bg-white p-6 md:p-12 lg:p-16 h-full"
+        className="relative overflow-hidden rounded-3xl border border-slate-200 shadow-md bg-white p-6 md:p-12 lg:p-16 lg:h-full"
       >
-        <div className="grid lg:grid-cols-2 gap-12 items-center h-full">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:h-full">
           {/* Content */}
           <div className="order-2 lg:order-1">
             <div className="mb-8">
@@ -228,7 +228,7 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
           </div>
 
           {/* Illustration */}
-          <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 flex items-center justify-center p-4">
+          <div className="hidden lg:flex order-1 lg:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 items-center justify-center p-4">
             {ILLUSTRATIONS[product.id]}
           </div>
         </div>
