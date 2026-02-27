@@ -165,7 +165,7 @@ export function ProductCards() {
 
         <div className="relative">
           {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
+            <ProductCard key={product.id} product={product} index={index} isLast={index === products.length - 1} />
           ))}
         </div>
       </div>
@@ -173,7 +173,7 @@ export function ProductCards() {
   );
 }
 
-function ProductCard({ product, index }: { product: typeof products[0]; index: number }) {
+function ProductCard({ product, index, isLast }: { product: typeof products[0]; index: number; isLast: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const [isLg, setIsLg] = useState(true);
@@ -197,6 +197,14 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
     isLg && !prefersReducedMotion ? [1, 0.95] : [1, 1],
   );
 
+  // Fade shadow to 0 as the card reaches its sticky position (gets covered by the next card).
+  // The last card always keeps its shadow — it's never covered.
+  const shadowOpacity = useTransform(scrollYProgress, [0.85, 1], isLast ? [1, 1] : [1, 0]);
+  const boxShadow = useTransform(
+    shadowOpacity,
+    (v) => `0 24px 60px -12px rgba(15, 23, 42, ${(0.12 * v).toFixed(3)}), 0 1px 4px rgba(15, 23, 42, ${(0.05 * v).toFixed(3)})`,
+  );
+
   return (
     <div
       ref={cardRef}
@@ -204,7 +212,7 @@ function ProductCard({ product, index }: { product: typeof products[0]; index: n
       style={{ top: '72px', zIndex: index + 1 }}
     >
       <motion.div
-        style={{ scale, willChange: 'transform', boxShadow: '0 24px 60px -12px rgba(15, 23, 42, 0.12), 0 1px 4px rgba(15, 23, 42, 0.05)' }}
+        style={{ scale, willChange: 'transform', boxShadow }}
         className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 md:p-12 lg:p-16 lg:h-full"
       >
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:h-full">
