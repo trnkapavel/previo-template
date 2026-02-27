@@ -28,7 +28,7 @@ export function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <PrevioLogo className="h-10 w-auto" />
+            <PrevioLogo className="h-11 w-auto" />
           </Link>
 
           {/* Desktop Nav */}

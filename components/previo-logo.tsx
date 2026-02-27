@@ -17,8 +17,10 @@ export function PrevioLogo({ className }: { className?: string }) {
           fill: #C70000;
           transition: fill 0.8s ease-in-out;
         }
-        svg:hover .part-seda {
-          fill: #C70000;
+        @media (hover: hover) {
+          svg:hover .part-seda {
+            fill: #C70000;
+          }
         }
         #vysacka-skupina {
           transform-origin: 60px 5px;
