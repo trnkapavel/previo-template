@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { PrevioLogo } from './previo-logo';
 
 export function Footer() {
   return (
@@ -6,13 +7,8 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl font-outfit">P</span>
-              </div>
-              <span className="text-2xl font-bold font-outfit tracking-tight text-slate-900">
-                Previo
-              </span>
+            <Link href="/" className="flex items-center mb-6">
+              <PrevioLogo className="h-10 w-auto" />
             </Link>
             <p className="text-slate-500 max-w-sm mb-6">
               Inovativní cloudový systém pro řízení hotelů, penzionů a apartmánů. Zjednodušujeme život hoteliérům od roku 2006.
