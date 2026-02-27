@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion, useMotionValueEvent } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import {
   ArrowRight, RefreshCw, TrendingUp, MousePointer2, ShieldCheck,
@@ -197,11 +197,11 @@ function ProductCard({ product, index, isLast }: { product: typeof products[0]; 
     isLg && !prefersReducedMotion ? [1, 0.95] : [1, 1],
   );
 
-  // Fade shadow to 0 as the card reaches its sticky position (gets covered by the next card).
-  // The last card always keeps its shadow — it's never covered.
-  // Animating boxShadow directly causes repaints on every frame even with will-change:transform.
-  // Instead: keep a static box-shadow and animate only opacity → fully GPU-composited.
+  // Shadow: same style as testimonials. Switch it off via a CSS class change (not per-frame JS)
+  // when the card reaches its sticky position so stacked cards don't compound shadows.
   const shadowOpacity = useTransform(scrollYProgress, [0.85, 1], isLast ? [1, 1] : [1, 0]);
+  const [hasShadow, setHasShadow] = useState(true);
+  useMotionValueEvent(shadowOpacity, 'change', (v) => setHasShadow(v > 0.5));
 
   return (
     <div
@@ -209,15 +209,11 @@ function ProductCard({ product, index, isLast }: { product: typeof products[0]; 
       className="relative lg:sticky mb-0 lg:min-h-[600px]"
       style={{ top: '72px', zIndex: index + 1 }}
     >
-      {/* Shadow layer — static box-shadow, only opacity animates (GPU composited, no repaints) */}
-      <motion.div
-        aria-hidden="true"
-        style={{ opacity: shadowOpacity }}
-        className="absolute inset-0 rounded-3xl pointer-events-none shadow-[0_24px_60px_-12px_rgba(15,23,42,0.12),_0_1px_4px_rgba(15,23,42,0.05)]"
-      />
       <motion.div
         style={{ scale, willChange: 'transform' }}
-        className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 md:p-12 lg:p-16 lg:h-full"
+        className={`relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 md:p-12 lg:p-16 lg:h-full transition-shadow duration-300 ${
+          hasShadow ? 'shadow-xl shadow-slate-200/50' : 'shadow-none'
+        }`}
       >
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:h-full">
           {/* Content */}
