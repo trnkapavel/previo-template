@@ -150,10 +150,10 @@ export function Hero() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, transition: { duration: 0.12 } }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                exit={{ opacity: 0, y: -20, transition: { duration: 0.12 } }}
+                transition={{ duration: 0.5 }}
               >
                 <div className="inline-flex items-center gap-2 text-slate-400 text-sm font-medium mb-8">
                   <ArrowRight className="w-4 h-4 text-slate-300" />
@@ -219,13 +219,13 @@ export function Hero() {
             className="relative lg:h-[600px] flex items-center"
           >
             <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-full rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, transition: { duration: 0.4 } }}
-                  transition={{ duration: 0.55 }}
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -40 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
                   className="absolute inset-0"
                 >
                   <Image
@@ -243,13 +243,12 @@ export function Hero() {
 
             {/* Overlay Info Boxes - Moved outside overflow-hidden to protrude */}
             <div className="absolute inset-0 z-20 pointer-events-none">
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                  transition={{ duration: 0.4 }}
+                  exit={{ opacity: 0 }}
                   className="absolute inset-0"
                 >
                   {slide.overlays.map((overlay, idx) => (
