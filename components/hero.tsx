@@ -146,14 +146,14 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content */}
-          <div className="text-left z-20">
-            <AnimatePresence mode="wait">
+          <div className="text-left z-20 relative">
+            <AnimatePresence>
               <motion.div
                 key={currentSlide}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, position: 'absolute', top: 0, left: 0, right: 0 }}
+                transition={{ duration: 0.35 }}
               >
                 <div className="inline-flex items-center gap-2 text-slate-400 text-sm font-medium mb-8">
                   <ArrowRight className="w-4 h-4 text-slate-300" />
@@ -219,13 +219,13 @@ export function Hero() {
             className="relative lg:h-[600px] flex items-center"
           >
             <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-full rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
-              <AnimatePresence mode="wait">
+              <AnimatePresence>
                 <motion.div
                   key={currentSlide}
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -40 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
                   className="absolute inset-0"
                 >
                   <Image
@@ -243,12 +243,13 @@ export function Hero() {
 
             {/* Overlay Info Boxes - Moved outside overflow-hidden to protrude */}
             <div className="absolute inset-0 z-20 pointer-events-none">
-              <AnimatePresence mode="wait">
+              <AnimatePresence>
                 <motion.div
                   key={currentSlide}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35 }}
                   className="absolute inset-0"
                 >
                   {slide.overlays.map((overlay, idx) => (
