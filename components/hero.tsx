@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight, Play, CheckCircle2, Hotel, Home, Building2, UserCheck, Clock, ShieldCheck,
   Globe, ClipboardCheck, Layers, Tag, RefreshCw, Send, Zap, Headphones, Phone,
-  Smartphone, TrendingUp, BarChart2, MessageSquare, CalendarCheck, Users,
+  Smartphone, TrendingUp, BarChart2, MessageSquare, CalendarCheck, Users, ChevronDown,
 } from 'lucide-react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 type Overlay = {
   title: string;
@@ -137,38 +137,68 @@ const slides = [
   },
 ];
 
+const LOGOS = ['Pytloun Hotels', 'Orea Hotels', 'Grandhotel Pupp', 'Mamaison', 'Barceló Hotels'];
+
+const SLIDE_DURATION = 8000;
+
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [borderVisible, setBorderVisible] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef(0);
 
+  // Auto-advance — pauses on hover
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000);
+    }, SLIDE_DURATION);
     return () => clearInterval(timer);
+  }, [isPaused]);
+
+  // Border reveal after photo loads
+  useEffect(() => {
+    const t = setTimeout(() => setBorderVisible(true), 1100);
+    return () => clearTimeout(t);
   }, []);
+
+  // Mobile swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const delta = touchStartX.current - e.changedTouches[0].clientX;
+    if (delta > 50)  setCurrentSlide((prev) => (prev + 1) % slides.length);
+    if (delta < -50) setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
   const slide = slides[currentSlide];
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-      {/* Background Elements & Shapes */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white"></div>
+    <section
+      className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
 
-      {/* Subtle Background Shapes */}
+      {/* Subtle background shapes */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none opacity-20">
-        <div className="absolute top-[10%] left-[5%] w-64 h-64 border border-primary-200 rounded-full"></div>
-        <div className="absolute top-[20%] right-[10%] w-96 h-96 border border-indigo-100 rounded-full"></div>
-        <div className="absolute bottom-[10%] left-[15%] w-48 h-48 border border-primary-100 rotate-45"></div>
+        <div className="absolute top-[10%] left-[5%] w-64 h-64 border border-primary-200 rounded-full" />
+        <div className="absolute top-[20%] right-[10%] w-96 h-96 border border-indigo-100 rounded-full" />
+        <div className="absolute bottom-[10%] left-[15%] w-48 h-48 border border-primary-100 rotate-45" />
         <svg className="absolute top-[40%] left-[2%] text-primary-200 w-24 h-24" viewBox="0 0 100 100" fill="none" stroke="currentColor">
           <circle cx="50" cy="50" r="40" strokeDasharray="4 4" />
         </svg>
       </div>
 
-      <div className="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-primary-100/30 rounded-full blur-3xl -z-10"></div>
+      <div className="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-primary-100/30 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Content */}
+
+          {/* ── Left column ── */}
           <div className="text-left z-20">
             <AnimatePresence mode="wait">
               <motion.div
@@ -178,8 +208,12 @@ export function Hero() {
                 exit={{ opacity: 0, y: -20, transition: { duration: 0.12 } }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="inline-flex items-center gap-2 text-slate-400 text-sm font-medium mb-8">
-                  <ArrowRight className="w-4 h-4 text-slate-300" />
+                {/* Badge with pulsing live dot */}
+                <div className="inline-flex items-center gap-2 text-sm font-medium mb-8">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500" />
+                  </span>
                   <span className="text-primary-700">{slide.badge}</span>
                 </div>
 
@@ -200,14 +234,15 @@ export function Hero() {
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <button className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-[3px] font-medium text-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group">
-                    <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
-                      <Play className="w-3 h-3 text-slate-600 group-hover:text-primary-600" fill="currentColor" />
+                    <div className="relative w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
+                      <span className="absolute inset-0 rounded-full border border-primary-300 animate-ping opacity-0 group-hover:opacity-60" />
+                      <Play className="w-3 h-3 text-slate-600 group-hover:text-primary-600 relative z-10" fill="currentColor" />
                     </div>
                     Přehrát video
                   </button>
                 </div>
 
-                {/* SVG Animations / Icons */}
+                {/* Feature tags */}
                 <div className="mt-12 flex flex-wrap gap-6">
                   {slide.icons.map((item, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-slate-500 text-sm font-medium">
@@ -221,30 +256,65 @@ export function Hero() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Slider Controls */}
-            <div className="mt-12 flex gap-2">
+            {/* Progress dots */}
+            <div className="mt-12 flex gap-3 items-center">
               {slides.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`h-1.5 rounded-full transition-all ${currentSlide === idx ? 'w-8 bg-primary-600' : 'w-2 bg-slate-200 hover:bg-slate-300'}`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
+                  aria-label={`Slide ${idx + 1}`}
+                  className={`relative h-2.5 rounded-full overflow-hidden transition-all duration-300 cursor-pointer ${
+                    currentSlide === idx
+                      ? 'w-20 bg-slate-200'
+                      : 'w-8 bg-slate-200 hover:bg-slate-300 hover:w-10'
+                  }`}
+                >
+                  {currentSlide === idx && (
+                    <div
+                      key={currentSlide}
+                      className="absolute inset-y-0 left-0 bg-primary-600 rounded-full"
+                      style={{
+                        width: '100%',
+                        transformOrigin: 'left',
+                        animation: `heroProgress ${SLIDE_DURATION}ms linear forwards`,
+                        animationPlayState: isPaused ? 'paused' : 'running',
+                      }}
+                    />
+                  )}
+                </button>
               ))}
+            </div>
+
+            {/* Logo / social proof strip */}
+            <div className="mt-8 pt-8 border-t border-slate-100">
+              <p className="text-xs text-slate-400 mb-3 uppercase tracking-wider">Důvěřují nám přes 4 000 ubytovacích zařízení</p>
+              <div className="flex flex-wrap gap-x-6 gap-y-2 items-center">
+                {LOGOS.map((name) => (
+                  <span key={name} className="text-slate-300 font-semibold text-sm">{name}</span>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Right Slider Content */}
+          {/* ── Right column — image ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.4 }}
             className="relative lg:h-[600px] flex items-center"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
-            {/* Decorative border offset layer */}
-            <div className="absolute inset-0 translate-x-[14px] translate-y-[14px] rounded-tl-[114px] rounded-tr-[17px] rounded-bl-[17px] rounded-br-[114px] border-2 border-slate-300 z-0" />
+            {/* Decorative offset border */}
+            <motion.div
+              animate={{ opacity: borderVisible ? 1 : 0 }}
+              transition={{ duration: 0.4 }}
+              style={{ x: 14, y: 14 }}
+              className="absolute inset-0 rounded-tl-[114px] rounded-tr-[17px] rounded-bl-[17px] rounded-br-[114px] border-2 border-slate-300 z-0"
+            />
 
-            <div className="relative w-full aspect-[4/3] lg:aspect-auto lg:h-full rounded-tl-[100px] rounded-tr-[3px] rounded-bl-[3px] rounded-br-[100px] overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
+            {/* Photo */}
+            <div className="group relative w-full aspect-[4/3] lg:aspect-auto lg:h-full rounded-tl-[100px] rounded-tr-[3px] rounded-bl-[3px] rounded-br-[100px] overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -260,15 +330,18 @@ export function Hero() {
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     style={{ objectPosition: ('objectPosition' in slide ? slide.objectPosition : 'center') as string }}
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
               </AnimatePresence>
+
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent z-10 pointer-events-none" />
             </div>
 
-            {/* Overlay Info Boxes - Moved outside overflow-hidden to protrude */}
+            {/* Overlay info bubbles */}
             <div className="absolute inset-0 z-20 pointer-events-none">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -299,11 +372,27 @@ export function Hero() {
               </AnimatePresence>
             </div>
 
-            {/* Decorative background patterns — hidden on mobile (blur-3xl is expensive to rasterise) */}
-            <div className="hidden lg:block absolute -top-10 -right-10 w-64 h-64 bg-primary-100 rounded-full -z-0 blur-3xl opacity-30"></div>
-            <div className="hidden lg:block absolute -bottom-10 -left-10 w-80 h-80 bg-indigo-100 rounded-full -z-0 blur-3xl opacity-30"></div>
+            {/* Decorative blurs */}
+            <div className="hidden lg:block absolute -top-10 -right-10 w-64 h-64 bg-primary-100 rounded-full -z-0 blur-3xl opacity-30" />
+            <div className="hidden lg:block absolute -bottom-10 -left-10 w-80 h-80 bg-indigo-100 rounded-full -z-0 blur-3xl opacity-30" />
           </motion.div>
         </div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="flex flex-col items-center mt-16 gap-1 text-slate-400 cursor-default select-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 0.6 }}
+        >
+          <span className="text-xs tracking-widest uppercase">Posunout dolů</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <ChevronDown className="w-5 h-5" />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

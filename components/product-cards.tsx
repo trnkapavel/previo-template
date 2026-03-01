@@ -27,7 +27,7 @@ const products = [
     id: 'pms',
     href: '/pms',
     title: 'Recepční systém PMS',
-    description: 'Kompletní správa recepce. Přehledná plachta pokojů, rychlý check-in/out a správa hostů na jednom místě.',
+    description: 'Celý hotel přehledně na jedné obrazovce.',
     features: [
       {
         title: 'Plachta pokojů v reálném čase',
@@ -46,7 +46,7 @@ const products = [
     id: 'channel',
     href: '/channel-manager',
     title: 'Channel Manager nové generace',
-    description: 'Synchronizace s Booking.com, Expedia a 300+ dalšími portály v reálném čase. Žádné overbooky.',
+    description: '300+ portálů. Jedna změna. Vše synchronizováno.',
     features: [
       {
         title: 'Synchronizace v reálném čase',
@@ -65,7 +65,7 @@ const products = [
     id: 'booking',
     href: '/booking-engine',
     title: 'Rezervační systém',
-    description: 'Proměňte návštěvníky webu na zákazníky vlastním rezervačním systémem integrovaným přímo do vašeho webu.',
+    description: 'Každá rezervace z webu je vaše. Bez provize.',
     features: [
       {
         title: 'Vyšší konverze návštěvníků',
@@ -84,7 +84,7 @@ const products = [
     id: 'alfred',
     href: '/alfred',
     title: 'Alfred, moderní správa vašeho hotelu',
-    description: 'Digitální asistent pro moderní hotely. Od klíčů po platby — vše z jednoho místa.',
+    description: 'Check-in bez recepce. Hosté přijedou, usadí se a zaplatí sami.',
     features: [
       {
         title: 'Digitální klíče',
@@ -103,7 +103,7 @@ const products = [
     id: 'reporting',
     href: '/prehled-a-analytika',
     title: 'Přehledy a analytika',
-    description: 'Řiďte svůj hotel na základě dat. Přehledné reporty a analytika v reálném čase na jednom místě.',
+    description: 'Víte přesně, kolik vyděláváte a proč.',
     features: [
       {
         title: 'Přehled tržeb v reálném čase',
@@ -122,7 +122,7 @@ const products = [
     id: 'housekeeping',
     href: '/housekeeping',
     title: 'Inteligentní správa úklidu',
-    description: 'Mobilní aplikace pro pokojské s real-time přehledem o stavu a průběhu úklidu každého pokoje.',
+    description: 'Pokoj připravený včas. Bez telefonování, bez papírů.',
     features: [
       {
         title: 'Automatické přiřazování úkolů',

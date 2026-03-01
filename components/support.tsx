@@ -1,146 +1,262 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Phone, Mail, Clock, MessageSquare, ArrowRight, Zap, Headset } from 'lucide-react';
+import { Phone, Mail, Clock, MessageSquare, ArrowRight, Zap, Headset, Timer } from 'lucide-react';
 import { useState, useEffect } from 'react';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const fadeIn = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } },
+};
+
+const stagger = (delay = 0, staggerChildren = 0.09) => ({
+  hidden: {},
+  visible: { transition: { delayChildren: delay, staggerChildren } },
+});
+
+const HOURS = [
+  { day: 'Po', from: 8, to: 20 },
+  { day: 'Út', from: 8, to: 20 },
+  { day: 'St', from: 8, to: 20 },
+  { day: 'Čt', from: 8, to: 20 },
+  { day: 'Pá', from: 8, to: 20 },
+  { day: 'So', from: 9, to: 17 },
+  { day: 'Ne', from: 9, to: 17 },
+];
+
+const STATS = [
+  { value: '7 dní', label: 'v týdnu k dispozici' },
+  { value: '4 000+', label: 'spokojených klientů' },
+  { value: '20 let', label: 'na trhu' },
+];
 
 export function SupportSection() {
   const [isOpen, setIsOpen] = useState(false);
+  const [todayIdx, setTodayIdx] = useState(0);
 
   useEffect(() => {
-    const checkStatus = () => {
+    const check = () => {
       const now = new Date();
-      const day = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+      const day = now.getDay();
       const hour = now.getHours();
-
-      // Po - Pá 8:00 - 20:00
-      if (day >= 1 && day <= 5) {
-        if (hour >= 8 && hour < 20) {
-          setIsOpen(true);
-          return;
-        }
-      }
-      // So - Ne 9:00 - 17:00
-      if (day === 0 || day === 6) {
-        if (hour >= 9 && hour < 17) {
-          setIsOpen(true);
-          return;
-        }
-      }
-      setIsOpen(false);
+      const jsToIdx = [6, 0, 1, 2, 3, 4, 5]; // Sun=0 → idx 6
+      setTodayIdx(jsToIdx[day]);
+      const { from, to } = HOURS[jsToIdx[day]];
+      setIsOpen(hour >= from && hour < to);
     };
-
-    checkStatus();
-    const interval = setInterval(checkStatus, 60000); // Check every minute
-    return () => clearInterval(interval);
+    check();
+    const t = setInterval(check, 60000);
+    return () => clearInterval(t);
   }, []);
 
   return (
     <section className="py-24 bg-white relative overflow-hidden" id="podpora">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#f3f3f3] rounded-3xl overflow-hidden relative shadow-xl border border-slate-200">
-          {/* Decorative background */}
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-primary-50 skew-x-12 translate-x-1/4"></div>
-          <Headset className="absolute -bottom-12 -right-12 w-96 h-96 text-slate-200 -rotate-12 pointer-events-none" />
-          
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative bg-slate-900 rounded-3xl overflow-hidden"
+        >
+          {/* Background texture */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary-900/40 via-slate-900 to-slate-900 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-600/5 rounded-full blur-3xl pointer-events-none" />
+          <Headset className="absolute -bottom-10 -right-10 w-[420px] h-[420px] text-white/[0.04] -rotate-12 pointer-events-none select-none" />
+
           <div className="relative grid lg:grid-cols-2 gap-0">
-            {/* Left side: Contact Info */}
-            <div className="p-8 md:p-16 lg:p-20 border-b lg:border-b-0 lg:border-r border-slate-200">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 mb-6 shadow-sm">
-                  <div className={`w-2 h-2 rounded-full ${isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'}`}></div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
-                    {isOpen ? 'Jsme online' : 'Aktuálně mimo provoz'}
+
+            {/* ── Left: headline + number + stats ── */}
+            <motion.div
+              variants={stagger(0.2)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="p-8 md:p-14 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10"
+            >
+              <div>
+                {/* Live status */}
+                <motion.div
+                  variants={fadeIn}
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border mb-8 ${
+                    isOpen
+                      ? 'bg-emerald-500/10 border-emerald-500/30'
+                      : 'bg-white/5 border-white/10'
+                  }`}
+                >
+                  <span className="relative flex h-2 w-2">
+                    {isOpen && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />}
+                    <span className={`relative inline-flex rounded-full h-2 w-2 ${isOpen ? 'bg-emerald-400' : 'bg-slate-500'}`} />
                   </span>
-                </div>
-                
-                <h2 className="text-3xl md:text-5xl font-bold font-outfit text-slate-900 mb-6">
-                  Call center
-                </h2>
-                <p className="text-xl text-slate-600 mb-10 max-w-md">
-                  Naše klientská linka je tu pro vás každý den. Rádi vám pomůžeme s nastavením i dotazy.
-                </p>
+                  <span className={`text-xs font-bold uppercase tracking-wider ${isOpen ? 'text-emerald-400' : 'text-slate-400'}`}>
+                    {isOpen ? 'Právě jsme online' : 'Aktuálně mimo provoz'}
+                  </span>
+                </motion.div>
 
-                <div className="space-y-8">
-                  <div className="flex items-start gap-6 group">
-                    <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-primary-600 flex items-center justify-center text-white shadow-lg shadow-primary-600/20 group-hover:scale-110 transition-transform">
-                      <Phone className="w-7 h-7" />
-                    </div>
-                    <div>
-                      <div className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">Klientská linka</div>
-                      <a href="tel:+420251613924" className="text-2xl md:text-3xl font-bold text-slate-900 hover:text-primary-600 transition-colors">
-                        +420 251 613 924
-                      </a>
-                    </div>
+                {/* Headline */}
+                <motion.h2
+                  variants={fadeUp}
+                  className="text-4xl md:text-6xl font-bold font-outfit text-white leading-[1.05] mb-6"
+                >
+                  Zavoláte.<br />Odpovíme.
+                </motion.h2>
+
+                <motion.p
+                  variants={fadeUp}
+                  className="text-slate-400 text-lg mb-10 max-w-sm leading-relaxed"
+                >
+                  Žádný chatbot, žádné čekání na e-mail. Prostě zavolejte a někdo to s vámi vyřeší.
+                </motion.p>
+
+                {/* Big phone CTA */}
+                <motion.a
+                  variants={fadeUp}
+                  href="tel:+420251613924"
+                  className="group inline-flex items-center gap-4 mb-10"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-primary-600 flex items-center justify-center shadow-lg shadow-primary-600/30 group-hover:bg-primary-500 group-hover:scale-110 transition-all">
+                    <Phone className="w-6 h-6 text-white" />
                   </div>
+                  <span className="text-3xl md:text-4xl font-bold text-white group-hover:text-primary-400 transition-colors tracking-tight">
+                    +420 251 613 924
+                  </span>
+                </motion.a>
 
-                  <div className="flex items-start gap-6 group">
-                    <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-slate-600 group-hover:bg-slate-50 transition-colors">
-                      <Clock className="w-7 h-7" />
-                    </div>
-                    <div>
-                      <div className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-1">Provozní doba</div>
-                      <div className="text-lg text-slate-700">
-                        <span className="font-bold text-slate-900">Po - Pá</span> 8:00 - 20:00
-                      </div>
-                      <div className="text-lg text-slate-700">
-                        <span className="font-bold text-slate-900">So - Ne</span> 9:00 - 17:00
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+                {/* Response time */}
+                <motion.div variants={fadeUp} className="flex items-center gap-2 mb-10 -mt-6">
+                  <Timer className="w-3.5 h-3.5 text-slate-500" />
+                  <span className="text-xs text-slate-500">Průměrná odezva <span className="text-slate-300 font-semibold">do 3 minut</span></span>
+                </motion.div>
 
-            {/* Right side: Email & CTA */}
-            <div className="p-8 md:p-16 lg:p-20 flex flex-col justify-center">
+                {/* Email */}
+                <motion.div variants={fadeUp} className="flex items-center gap-3">
+                  <Mail className="w-4 h-4 text-slate-500" />
+                  <a href="mailto:info@previo.cz" className="text-slate-400 hover:text-white transition-colors text-sm">
+                    info@previo.cz
+                  </a>
+                </motion.div>
+              </div>
+
+              {/* Stats row */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                variants={stagger(0.55, 0.13)}
+                initial="hidden"
+                whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
+                className="grid grid-cols-3 gap-3 mt-12 pt-12 border-t border-white/10"
               >
-                <div className="mb-12">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Mail className="w-6 h-6 text-primary-600" />
-                    <h3 className="text-xl font-bold text-slate-900">Máte další otázky?</h3>
-                  </div>
-                  <p className="text-slate-600 text-lg mb-6">
-                    Napište nám na <a href="mailto:info@previo.cz" className="text-primary-600 font-bold hover:underline">info@previo.cz</a>, rádi Vám poradíme s čímkoliv.
-                  </p>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <button className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm text-left hover:shadow-md hover:-translate-y-1 transition-all group">
-                    <MessageSquare className="w-8 h-8 text-primary-600 mb-4" />
-                    <div className="font-bold text-slate-900 mb-1">Nápověda</div>
-                    <div className="text-sm text-slate-500 flex items-center gap-1 group-hover:text-primary-600 transition-colors">
-                      Přejít do centra nápovědy <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </button>
-                  
-                  <button className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm text-left hover:shadow-md hover:-translate-y-1 transition-all group">
-                    <Zap className="w-8 h-8 text-primary-600 mb-4" />
-                    <div className="font-bold text-slate-900 mb-1">Webináře</div>
-                    <div className="text-sm text-slate-500 flex items-center gap-1 group-hover:text-primary-600 transition-colors">
-                      Sledujte naše návody <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </button>
-                </div>
-
-                <div className="mt-12 p-6 rounded-2xl bg-primary-50 border border-primary-100">
-                  <p className="text-primary-800 text-sm italic">
-                    &quot;Naše podpora je hodnocena jako jedna z nejlepších na trhu. Průměrná doba odezvy na e-mail je pod 2 hodiny.&quot;
-                  </p>
-                </div>
+                {STATS.map((s) => (
+                  <motion.div key={s.value} variants={fadeUp}>
+                    <div className="text-2xl font-bold text-white mb-1">{s.value}</div>
+                    <div className="text-xs text-slate-500 leading-tight">{s.label}</div>
+                  </motion.div>
+                ))}
               </motion.div>
-            </div>
+            </motion.div>
+
+            {/* ── Right: hours + cards ── */}
+            <motion.div
+              variants={stagger(0.35)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="p-8 md:p-14 lg:p-16 flex flex-col justify-between"
+            >
+              <div>
+                <motion.div variants={fadeIn} className="flex items-center gap-2 mb-6">
+                  <Clock className="w-4 h-4 text-slate-400" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Provozní doba</span>
+                </motion.div>
+
+                {/* Hours grid — each day staggered */}
+                <div className="relative mb-12">
+                  {/* Weekend label */}
+                  <motion.div
+                    variants={fadeIn}
+                    className="absolute -top-5 right-0 flex items-center gap-1 text-[10px] font-semibold text-primary-400/80 uppercase tracking-wider"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-primary-400/60 inline-block" />
+                    i víkendy
+                  </motion.div>
+                <motion.div
+                  variants={stagger(0, 0.06)}
+                  className="grid grid-cols-7 gap-1.5"
+                >
+                  {HOURS.map((h, idx) => {
+                    const isToday = idx === todayIdx;
+                    return (
+                      <motion.div
+                        key={h.day}
+                        variants={{
+                          hidden: { opacity: 0, y: 16 },
+                          visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+                        }}
+                        className="flex flex-col items-center gap-1.5"
+                      >
+                        <span className={`text-[11px] font-bold uppercase ${isToday ? 'text-primary-400' : 'text-slate-500'}`}>
+                          {h.day}
+                        </span>
+                        <div className={`w-full rounded-lg p-2 text-center ${
+                          isToday
+                            ? 'bg-primary-600/20 border border-primary-600/40'
+                            : 'bg-white/5 border border-white/5'
+                        }`}>
+                          <div className={`text-[10px] font-semibold leading-tight ${isToday ? 'text-primary-300' : 'text-slate-400'}`}>
+                            {h.from}:00
+                          </div>
+                          <div className={`text-[10px] leading-tight ${isToday ? 'text-primary-400/70' : 'text-slate-600'}`}>
+                            {h.to}:00
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </motion.div>
+                </div>
+
+                {/* Team note */}
+                <motion.div variants={fadeUp} className="p-5 rounded-2xl bg-white/5 border border-white/10 mb-8">
+                  <p className="text-slate-300 text-sm leading-relaxed mb-3">
+                    Náš tým tvoří lidé, kteří hoteliérský provoz znají zevnitř. Víme, co to znamená, když systém nefunguje uprostřed check-inu.
+                  </p>
+                  <p className="text-slate-500 text-xs font-medium">Tým zákaznické podpory Previo</p>
+                </motion.div>
+              </div>
+
+              {/* Quick links */}
+              <motion.div
+                variants={stagger(0, 0.1)}
+                className="grid sm:grid-cols-2 gap-3"
+              >
+                <motion.button
+                  variants={fadeUp}
+                  className="p-5 rounded-2xl bg-white/5 border border-white/10 text-left hover:bg-white/10 hover:border-white/20 transition-all group"
+                >
+                  <MessageSquare className="w-6 h-6 text-primary-400 mb-3" />
+                  <div className="font-bold text-white text-sm mb-1">Centrum nápovědy</div>
+                  <div className="text-xs text-slate-500 flex items-center gap-1 group-hover:text-slate-300 transition-colors">
+                    Procházet články <ArrowRight className="w-3 h-3" />
+                  </div>
+                </motion.button>
+                <motion.button
+                  variants={fadeUp}
+                  className="p-5 rounded-2xl bg-white/5 border border-white/10 text-left hover:bg-white/10 hover:border-white/20 transition-all group"
+                >
+                  <Zap className="w-6 h-6 text-primary-400 mb-3" />
+                  <div className="font-bold text-white text-sm mb-1">Webináře</div>
+                  <div className="text-xs text-slate-500 flex items-center gap-1 group-hover:text-slate-300 transition-colors">
+                    Sledovat návody <ArrowRight className="w-3 h-3" />
+                  </div>
+                </motion.button>
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

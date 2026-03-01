@@ -4,6 +4,11 @@ html {
   position: relative;
 }
 
+@keyframes heroProgress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
 @theme {
   --font-sans: var(--font-inter);
   --font-outfit: var(--font-outfit);
