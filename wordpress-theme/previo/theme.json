@@ -1,0 +1,117 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "palette": [
+        {
+          "slug": "primary-50",
+          "color": "#fdf2f2",
+          "name": "Primary 50"
+        },
+        {
+          "slug": "primary-100",
+          "color": "#fbe5e5",
+          "name": "Primary 100"
+        },
+        {
+          "slug": "primary-200",
+          "color": "#f7cccc",
+          "name": "Primary 200"
+        },
+        {
+          "slug": "primary-300",
+          "color": "#f2b2b2",
+          "name": "Primary 300"
+        },
+        {
+          "slug": "primary-400",
+          "color": "#e97f7f",
+          "name": "Primary 400"
+        },
+        {
+          "slug": "primary-500",
+          "color": "#e04c4c",
+          "name": "Primary 500"
+        },
+        {
+          "slug": "primary-600",
+          "color": "#b50000",
+          "name": "Primary 600"
+        },
+        {
+          "slug": "primary-700",
+          "color": "#910000",
+          "name": "Primary 700"
+        },
+        {
+          "slug": "primary-800",
+          "color": "#740000",
+          "name": "Primary 800"
+        },
+        {
+          "slug": "primary-900",
+          "color": "#5e0000",
+          "name": "Primary 900"
+        },
+        {
+          "slug": "slate-50",
+          "color": "#f8fafc",
+          "name": "Slate 50"
+        },
+        {
+          "slug": "slate-100",
+          "color": "#f1f5f9",
+          "name": "Slate 100"
+        },
+        {
+          "slug": "slate-200",
+          "color": "#e2e8f0",
+          "name": "Slate 200"
+        },
+        {
+          "slug": "slate-600",
+          "color": "#475569",
+          "name": "Slate 600"
+        },
+        {
+          "slug": "slate-900",
+          "color": "#0f172a",
+          "name": "Slate 900"
+        },
+        {
+          "slug": "white",
+          "color": "#ffffff",
+          "name": "White"
+        }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "Inter, system-ui, sans-serif",
+          "slug": "inter",
+          "name": "Inter"
+        },
+        {
+          "fontFamily": "Outfit, system-ui, sans-serif",
+          "slug": "outfit",
+          "name": "Outfit"
+        }
+      ],
+      "fontSizes": [
+        { "slug": "small", "size": "0.875rem", "name": "Small" },
+        { "slug": "medium", "size": "1rem", "name": "Medium" },
+        { "slug": "large", "size": "1.125rem", "name": "Large" },
+        { "slug": "x-large", "size": "1.5rem", "name": "Extra Large" },
+        { "slug": "xx-large", "size": "2.25rem", "name": "2X Large" },
+        { "slug": "xxx-large", "size": "3rem", "name": "3X Large" }
+      ]
+    },
+    "spacing": {
+      "units": ["px", "rem", "em", "%"]
+    }
+  },
+  "templateParts": []
+}

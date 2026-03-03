@@ -176,6 +176,7 @@ export function Hero() {
 
   return (
     <section
+      data-export-section="hero"
       className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}

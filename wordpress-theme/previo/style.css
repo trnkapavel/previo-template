@@ -1,0 +1,37 @@
+/*
+Theme Name: Previo
+Theme URI: https://previo.cz
+Description: Šablona exportovaná z Next.js (Previo). Design systém a Gutenberg patterns v souladu s hlavním webem.
+Author: Previo
+Version: 0.1.0
+License: GNU General Public License v2 or later
+Text Domain: previo
+*/
+
+/* Základní styly – detailní CSS se generuje z Tailwind / doplňuje export. */
+:root {
+  --color-primary-50: #fdf2f2;
+  --color-primary-100: #fbe5e5;
+  --color-primary-200: #f7cccc;
+  --color-primary-300: #f2b2b2;
+  --color-primary-400: #e97f7f;
+  --color-primary-500: #e04c4c;
+  --color-primary-600: #b50000;
+  --color-primary-700: #910000;
+  --color-primary-800: #740000;
+  --color-primary-900: #5e0000;
+}
+
+body {
+  font-family: var(--wp--preset--font-family--inter, system-ui, sans-serif);
+  color: #0f172a;
+  background: #fff;
+}
+
+/* Odkazy v barvě primární */
+a {
+  color: var(--color-primary-600, #b50000);
+}
+a:hover {
+  color: var(--color-primary-700, #910000);
+}

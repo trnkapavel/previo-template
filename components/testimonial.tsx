@@ -91,7 +91,7 @@ export function Testimonial() {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="py-24 bg-slate-50 overflow-hidden relative" id="reference">
+    <section data-export-section="testimonial" className="py-24 bg-slate-50 overflow-hidden relative" id="reference">
       {/* Decorative background element */}
       <div className="absolute top-0 left-0 w-full h-1/2 bg-white"></div>
       

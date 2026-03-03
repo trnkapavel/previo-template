@@ -1,6 +1,7 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
+  ...(process.env.BUILD_FOR_WP === '1' && { output: 'export' as const }),
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,

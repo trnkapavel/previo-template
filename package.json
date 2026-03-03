@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export:wp": "node scripts/export-to-wp.js",
+    "build:wp": "BUILD_FOR_WP=1 npx next build && npm run export:wp"
   },
   "dependencies": {
     "clsx": "^2.1.1",
