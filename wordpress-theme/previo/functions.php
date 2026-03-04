@@ -74,3 +74,50 @@ function previo_register_pattern_category() {
 	);
 }
 add_action( 'init', 'previo_register_pattern_category' );
+
+/**
+ * Načtení stylů šablony (včetně CSS vygenerovaného z Next.js buildu).
+ */
+function previo_enqueue_styles() {
+	wp_enqueue_style(
+		'previo-style',
+		get_stylesheet_uri(),
+		array(),
+		PREVIO_THEME_VERSION
+	);
+
+	$compiled_css = PREVIO_THEME_DIR . '/assets/app.css';
+
+	if ( file_exists( $compiled_css ) ) {
+		wp_enqueue_style(
+			'previo-app',
+			PREVIO_THEME_URI . '/assets/app.css',
+			array( 'previo-style' ),
+			PREVIO_THEME_VERSION
+		);
+	}
+}
+add_action( 'wp_enqueue_scripts', 'previo_enqueue_styles' );
+
+/**
+ * Skript pro navbar: při scrollu přidá třídu pro bílé průhledné pozadí + blur.
+ */
+function previo_navbar_scroll_script() {
+	if ( is_admin() ) {
+		return;
+	}
+	?>
+	<script>
+	(function() {
+		var header = document.querySelector('header[data-export-section="navbar"]');
+		if (!header) return;
+		function onScroll() {
+			header.classList.toggle('previo-nav-scrolled', window.scrollY > 20);
+		}
+		onScroll();
+		window.addEventListener('scroll', onScroll, { passive: true });
+	})();
+	</script>
+	<?php
+}
+add_action( 'wp_footer', 'previo_navbar_scroll_script', 5 );

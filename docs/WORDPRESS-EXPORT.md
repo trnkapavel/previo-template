@@ -55,6 +55,15 @@ previo-template/
    - najde elementy s atributem `data-export-section="…"`,
    - vyřízne jejich HTML a zapíše do `wordpress-theme/previo/patterns/<section>.html`.
 4. **WordPress** – theme v `wordpress-theme/previo/` automaticky registruje všechny `.html` soubory z `patterns/` jako Gutenberg patterny (kategorie „Previo“).
+5. **Šablona front-page** – skript zároveň sestaví `templates/front-page.html` tak, že každá sekce (navbar, hero, stats, …) je v šabloně jako **samostatný blok** (`wp:html`). V editoru (Vzhled → Editor / úprava šablony Front Page) pak můžeš vybrat každou sekci zvlášť a upravit ji.
+
+---
+
+## Editace bloků v Gutenbergu
+
+- Po exportu obsahuje šablona **Front Page** jednotlivé sekce jako **bloky typu „Vlastní HTML“** (Custom HTML).
+- V **Editoru vzhledu** (Vzhled → Editor) otevři šablonu pro domovskou stránku, klikni na sekci (navbar, hero, karty, …) – každá je jeden blok, který lze vybrat a v pravém panelu nebo v režimu kódu upravit.
+- Obsah je exportovaný HTML z Next.js; úpravy textu či odkazů provádíš přímo v HTML daného bloku. Po dalším `npm run build:wp` se šablona znovu vygeneruje z Nextu a ruční úpravy v šabloně přepíše – pro trvalé změny upravuj zdroj v Next.js a znovu exportuj.
 
 ---
 

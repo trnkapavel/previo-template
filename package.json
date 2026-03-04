@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "export:wp": "node scripts/export-to-wp.js",
     "build:wp": "BUILD_FOR_WP=1 npx next build && npm run export:wp"
   },
@@ -25,8 +25,8 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@eslint/js": "^9.0.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "^15.1.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0"
   }

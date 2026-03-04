@@ -1,11 +1,20 @@
-import { defineConfig } from "eslint/config";
-import next from "eslint-config-next";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import js from "@eslint/js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default defineConfig([{
-    extends: [...next],
-}]);
+export default [
+  {
+    ignores: ["node_modules/**", ".next/**", "wordpress-theme/**"],
+  },
+  {
+    files: ["scripts/export-to-wp.js"],
+    languageOptions: {
+      globals: {
+        require: "readonly",
+        module: "readonly",
+        __dirname: "readonly",
+        console: "readonly",
+        process: "readonly",
+      },
+    },
+  },
+  js.configs.recommended,
+];
