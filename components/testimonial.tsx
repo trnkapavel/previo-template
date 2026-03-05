@@ -13,11 +13,11 @@ const testimonials = [
     name: "Jan Novák",
     role: "Ředitel",
     hotel: "Grand Hotel Praha",
-    avatar: "https://picsum.photos/seed/avatar1/400/400",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
     logo: "https://picsum.photos/seed/logo1/200/100",
     stat: "+40%",
     statText: "Nárůst přímých rezervací během prvního půl roku",
-    image: "https://picsum.photos/seed/hotel1/800/600"
+    image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80"
   },
   {
     id: 2,
@@ -26,11 +26,11 @@ const testimonials = [
     name: "Petra Svobodová",
     role: "Provozní manažerka",
     hotel: "Penzion U Lesa",
-    avatar: "https://picsum.photos/seed/avatar2/400/400",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
     logo: "https://picsum.photos/seed/logo2/200/100",
     stat: "0",
     statText: "Overbookingů od nasazení Previa",
-    image: "https://picsum.photos/seed/hotel2/800/600"
+    image: "https://images.unsplash.com/photo-1762719300018-3a8c7af6d60b?w=800&q=80"
   },
   {
     id: 3,
@@ -39,11 +39,11 @@ const testimonials = [
     name: "Tomáš Kučera",
     role: "Majitel",
     hotel: "Boutique Hotel centrum",
-    avatar: "https://picsum.photos/seed/avatar3/400/400",
+    avatar: "https://randomuser.me/api/portraits/men/67.jpg",
     logo: "https://picsum.photos/seed/logo3/200/100",
     stat: "24/7",
     statText: "Dostupnost profesionální podpory",
-    image: "https://picsum.photos/seed/hotel3/800/600"
+    image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80"
   },
   {
     id: 4,
@@ -52,11 +52,11 @@ const testimonials = [
     name: "Lucie Dvořáková",
     role: "Finanční ředitelka",
     hotel: "Resort & Spa Riviéra",
-    avatar: "https://picsum.photos/seed/avatar4/400/400",
+    avatar: "https://randomuser.me/api/portraits/women/28.jpg",
     logo: "https://picsum.photos/seed/logo4/200/100",
     stat: "100%",
     statText: "Automatizace platebních procesů",
-    image: "https://picsum.photos/seed/hotel4/800/600"
+    image: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=800&q=80"
   }
 ];
 
@@ -145,7 +145,7 @@ export function Testimonial() {
                 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-6 justify-between border-t border-slate-100 pt-8">
                   <div className="flex items-center gap-5">
-                    <div className="w-20 h-20 rounded-full overflow-hidden relative bg-slate-200 shadow-md border-2 border-white">
+                    <div className="w-24 h-24 rounded-full overflow-hidden relative bg-slate-200 shadow-md border-2 border-white">
                       <Image 
                         src={current.avatar} 
                         alt={current.name} 

@@ -141,7 +141,7 @@ const products = [
 
 export function ProductCards() {
   return (
-    <section data-export-section="product-cards" className="py-24 md:pb-64 bg-slate-50 relative" id="produkty">
+    <section data-export-section="product-cards" className="py-24 bg-slate-50 relative" id="produkty">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <motion.h2
@@ -211,7 +211,7 @@ function ProductCard({ product, index, isLast }: { product: typeof products[0]; 
     >
       <motion.div
         style={{ scale, willChange: 'transform' }}
-        className={`relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 md:p-12 lg:p-16 lg:h-full transition-shadow duration-300 ${
+        className={`relative overflow-hidden rounded-3xl bg-white p-6 md:p-12 lg:p-16 lg:h-full transition-shadow duration-300 ${isLast ? '' : 'border border-slate-200'} ${
           hasShadow ? 'shadow-xl shadow-slate-200/50' : 'shadow-none'
         }`}
       >
