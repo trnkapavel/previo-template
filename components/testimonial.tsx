@@ -91,7 +91,12 @@ export function Testimonial() {
   const current = testimonials[currentIndex];
 
   return (
-    <section data-export-section="testimonial" className="py-24 bg-slate-50 overflow-hidden relative" id="reference">
+    <section
+      data-export-section="testimonial"
+      data-testimonial-slider="light"
+      className="py-24 bg-slate-50 overflow-hidden relative"
+      id="reference"
+    >
       {/* Decorative background element */}
       <div className="absolute top-0 left-0 w-full h-1/2 bg-white"></div>
       
@@ -136,37 +141,51 @@ export function Testimonial() {
               <div className="relative">
                 <Quote className="absolute -top-6 -left-8 w-24 h-24 text-primary-50 opacity-50 -z-10 rotate-180" />
                 
-                <h3 className="text-2xl md:text-3xl font-bold font-outfit text-slate-900 mb-6 relative z-10">
+                <h3
+                  data-testimonial-quote
+                  className="text-2xl md:text-3xl font-bold font-outfit text-slate-900 mb-6 relative z-10"
+                >
                   &quot;{current.quote}&quot;
                 </h3>
-                <blockquote className="text-lg text-slate-600 leading-relaxed mb-10 relative z-10">
+                <blockquote
+                  data-testimonial-text
+                  className="text-lg text-slate-600 leading-relaxed mb-10 relative z-10"
+                >
                   „{current.text}“
                 </blockquote>
                 
                 <div className="flex flex-col sm:flex-row sm:items-center gap-6 justify-between border-t border-slate-100 pt-8">
                   <div className="flex items-center gap-5">
                     <div className="w-24 h-24 rounded-full overflow-hidden relative bg-slate-200 shadow-md border-2 border-white">
-                      <Image 
-                        src={current.avatar} 
-                        alt={current.name} 
-                        fill 
+                      <Image
+                        src={current.avatar}
+                        alt={current.name}
+                        fill
+                        data-testimonial-avatar
                         className="object-cover"
                         referrerPolicy="no-referrer"
                         unoptimized
                       />
                     </div>
                     <div>
-                      <div className="font-bold text-slate-900 text-lg">{current.name}</div>
-                      <div className="text-slate-500">{current.role}</div>
-                      <div className="text-primary-600 font-medium mt-1">{current.hotel}</div>
+                      <div data-testimonial-name className="font-bold text-slate-900 text-lg">
+                        {current.name}
+                      </div>
+                      <div data-testimonial-role className="text-slate-500">
+                        {current.role}
+                      </div>
+                      <div data-testimonial-hotel className="text-primary-600 font-medium mt-1">
+                        {current.hotel}
+                      </div>
                     </div>
                   </div>
                   
                   <div className="hidden sm:block w-32 h-16 relative opacity-60 grayscale hover:grayscale-0 transition-all">
-                    <Image 
-                      src={current.logo} 
-                      alt={`Logo ${current.hotel}`} 
-                      fill 
+                    <Image
+                      src={current.logo}
+                      alt={`Logo ${current.hotel}`}
+                      fill
+                      data-testimonial-logo
                       className="object-contain object-right"
                       referrerPolicy="no-referrer"
                       unoptimized
@@ -178,10 +197,11 @@ export function Testimonial() {
               {/* Right side: Image & Stat */}
               <div className="relative">
                 <div className="aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden relative shadow-lg">
-                  <Image 
-                    src={current.image} 
-                    alt={`Hotel ${current.hotel}`} 
-                    fill 
+                  <Image
+                    src={current.image}
+                    alt={`Hotel ${current.hotel}`}
+                    fill
+                    data-testimonial-image
                     className="object-cover"
                     referrerPolicy="no-referrer"
                     unoptimized
@@ -196,8 +216,18 @@ export function Testimonial() {
                   transition={{ delay: 0.3 }}
                   className="absolute -bottom-6 -left-6 md:-bottom-8 md:-left-8 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 max-w-[240px]"
                 >
-                  <div className="text-4xl font-bold text-primary-600 font-outfit mb-2">{current.stat}</div>
-                  <div className="text-sm text-slate-600 font-medium leading-snug">{current.statText}</div>
+                  <div
+                    data-testimonial-stat
+                    className="text-4xl font-bold text-primary-600 font-outfit mb-2"
+                  >
+                    {current.stat}
+                  </div>
+                  <div
+                    data-testimonial-stat-text
+                    className="text-sm text-slate-600 font-medium leading-snug"
+                  >
+                    {current.statText}
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
@@ -212,6 +242,7 @@ export function Testimonial() {
                   setCurrentIndex(idx);
                   setIsAutoPlaying(false);
                 }}
+                data-testimonial-dot-index={idx}
                 className={`w-2.5 h-2.5 rounded-full transition-all ${
                   idx === currentIndex ? 'bg-primary-600 w-8' : 'bg-slate-200 hover:bg-slate-300'
                 }`}

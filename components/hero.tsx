@@ -177,6 +177,7 @@ export function Hero() {
   return (
     <section
       data-export-section="hero"
+      data-hero-slider="light"
       className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
@@ -218,20 +219,27 @@ export function Hero() {
                   <span className="text-primary-700">{slide.badge}</span>
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-outfit tracking-tight text-slate-900 mb-6 leading-[1.1]">
+                <h1
+                  data-hero-title
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold font-outfit tracking-tight text-slate-900 mb-6 leading-[1.1]"
+                >
                   {slide.title}
                 </h1>
 
-                <p className="text-lg md:text-xl text-slate-600 mb-10 max-w-xl leading-relaxed">
+                <p
+                  data-hero-description
+                  className="text-lg md:text-xl text-slate-600 mb-10 max-w-xl leading-relaxed"
+                >
                   {slide.description}
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                   <a
                     href={slide.buttonHref}
+                    data-hero-primary
                     className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center justify-center gap-2 group"
                   >
-                    {slide.buttonText}
+                    <span data-hero-primary-text>{slide.buttonText}</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <button className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-[3px] font-medium text-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group">
@@ -328,6 +336,7 @@ export function Hero() {
                   <Image
                     src={slide.image}
                     alt={slide.title}
+                    data-hero-image
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -364,8 +373,18 @@ export function Hero() {
                         <overlay.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
-                        <div className="text-[10px] uppercase tracking-wider font-bold text-slate-400">{overlay.title}</div>
-                        <div className="text-base font-bold text-slate-900">{overlay.value}</div>
+                        <div
+                          data-hero-overlay-title-index={idx}
+                          className="text-[10px] uppercase tracking-wider font-bold text-slate-400"
+                        >
+                          {overlay.title}
+                        </div>
+                        <div
+                          data-hero-overlay-value-index={idx}
+                          className="text-base font-bold text-slate-900"
+                        >
+                          {overlay.value}
+                        </div>
                       </div>
                     </motion.div>
                   ))}
