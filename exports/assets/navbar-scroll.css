@@ -1,0 +1,14 @@
+/* Navbar – scrolled state (jako v Next.js: bílé pozadí, blur, border) */
+header[data-export-section="navbar"].navbar-scrolled {
+  background-color: rgb(255 255 255);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+@media (min-width: 768px) {
+  header[data-export-section="navbar"].navbar-scrolled {
+    background-color: rgba(255, 255, 255, 0.8);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}

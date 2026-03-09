@@ -10,7 +10,8 @@
     "export:wp": "node scripts/export-to-wp.js",
     "build:wp": "BUILD_FOR_WP=1 npx next build && npm run export:wp",
     "export:blocks": "node scripts/export-blocks.js",
-    "build:blocks": "BUILD_FOR_WP=1 npx next build && npm run export:blocks"
+    "build:blocks": "BUILD_FOR_WP=1 npx next build && npm run export:blocks",
+    "build:test-page": "node scripts/build-test-page.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",

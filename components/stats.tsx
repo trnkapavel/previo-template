@@ -16,7 +16,7 @@ function Counter({ value, duration = 2 }: { value: number; duration?: number }) 
     }
   }, [inView, count, value, duration]);
 
-  return <motion.span ref={ref}>{rounded}</motion.span>;
+  return <motion.span ref={ref} data-stat-value={value}>{rounded}</motion.span>;
 }
 
 export function StatsSection() {
