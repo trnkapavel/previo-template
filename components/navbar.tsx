@@ -45,7 +45,7 @@ const NAV_ITEMS: NavItem[] = [
       type: 'mega',
       featuredCards: [
         {
-          title: 'PMS',
+          title: 'Recepční systém',
           description: 'Kompletní správa hotelu na jednom místě',
           href: '/pms',
           gradientClass: 'from-primary-600 to-primary-800',
@@ -53,8 +53,8 @@ const NAV_ITEMS: NavItem[] = [
           illustration: <PmsIllustration />,
         },
         {
-          title: 'Alfred',
-          description: 'Chytrý asistent pro vaše hosty',
+          title: 'Virtuální recepční Alfred',
+          description: 'Chytrý asistent pro vaše hosty v mobilu i kiosku',
           href: '/alfred',
           gradientClass: 'from-emerald-500 to-emerald-700',
           watermark: 'ALF',
@@ -63,30 +63,23 @@ const NAV_ITEMS: NavItem[] = [
       ],
       groups: [
         {
-          heading: 'Správa provozu',
+          heading: 'Hlavní produkty',
           links: [
-            { label: 'PMS', href: '/pms' },
-            { label: 'Channel Manager', href: '/channel-manager' },
-            { label: 'Booking Engine', href: '/booking-engine' },
-            { label: 'Přehled a analytika', href: '/prehled-a-analytika' },
-            { label: 'Housekeeping', href: '/housekeeping' },
-            { label: 'Revenue Management', href: '/revenue-management' },
+            { label: 'Recepční systém (Hotelový software)', href: '/pms' },
+            { label: 'Rezervační systém', href: '/booking-engine' },
+            { label: 'Channel manager', href: '/channel-manager' },
           ],
         },
         {
-          heading: 'Pro hosty',
+          heading: 'Další řešení',
           links: [
-            { label: 'Alfred', href: '/alfred' },
-            { label: 'Online check-in', href: '/online-check-in' },
-            { label: 'Digitální klíč', href: '/digitalni-klic' },
-            { label: 'Guest messaging', href: '/guest-messaging' },
-          ],
-        },
-        {
-          heading: 'Ostatní',
-          links: [
-            { label: 'API a integrace', href: '/integrace' },
-            { label: 'Partnerský program', href: '/partneri' },
+            { label: 'Integrace', href: '/integrace' },
+            { label: 'Platební brána a terminál', href: '/platebni-brana-a-terminal' },
+            { label: 'Webové stránky', href: '/webove-stranky' },
+            { label: 'Virtuální recepční Alfred', href: '/alfred' },
+            { label: 'Mobilní aplikace Housekeeping', href: '/housekeeping' },
+            { label: 'ScanID aplikace', href: '/scanid-aplikace' },
+            { label: 'Hotelová automatizace', href: '/hotelova-automatizace' },
           ],
         },
       ],
