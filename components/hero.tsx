@@ -26,7 +26,7 @@ const slides = [
     description: "Přidejte se k více jak 4 000 spokojeným klientům. Previo je nejpoužívanější hotelový systém v Česku.",
     buttonText: "Zjistěte více",
     buttonHref: "#",
-    image: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&h=800&fit=crop&auto=format',
+    image: '/img/hero-1.png',
     icons: [
       { icon: Hotel, label: "Hotely" },
       { icon: Building2, label: "Penziony" },
@@ -45,7 +45,7 @@ const slides = [
     description: "Ulehčete své recepci automatizací check-in a check-out. Nechte webovou aplikaci Alfred pracovat za Vás.",
     buttonText: "Zjistěte více",
     buttonHref: "#",
-    image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=800&fit=crop&auto=format',
+    image: '/img/hero-2.png',
     icons: [
       { icon: UserCheck, label: "Self check-in" },
       { icon: ShieldCheck, label: "Bezpečné platby" },
@@ -64,7 +64,7 @@ const slides = [
     description: "Rychlý web a rezervační systém, který hostům nekomplikuje cestu. Vyšší konverze, méně provizí.",
     buttonText: "Zjistěte více",
     buttonHref: "#",
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&auto=format',
+    image: '/img/hero-3.png',
     icons: [
       { icon: Globe, label: "Vlastní web" },
       { icon: Smartphone, label: "Mobilní rezervace" },
