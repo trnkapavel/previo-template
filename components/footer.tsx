@@ -18,30 +18,30 @@ export function Footer() {
           <div>
             <h4 className="text-slate-900 font-bold mb-4">Produkty</h4>
             <ul className="space-y-3">
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Recepce (PMS)</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Booking Engine</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Channel Manager</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Previo Pay</Link></li>
+              <li><Link href="/pms" className="hover:text-primary-600 transition-colors">Recepce (PMS)</Link></li>
+              <li><Link href="/booking-engine" className="hover:text-primary-600 transition-colors">Booking Engine</Link></li>
+              <li><Link href="/channel-manager" className="hover:text-primary-600 transition-colors">Channel Manager</Link></li>
+              <li><Link href="/platebni-brana-a-terminal" className="hover:text-primary-600 transition-colors">Previo Pay</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-slate-900 font-bold mb-4">Společnost</h4>
             <ul className="space-y-3">
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">O nás</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Kariéra</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Kontakt</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Partneři</Link></li>
+              <li><Link href="/" className="hover:text-primary-600 transition-colors">O nás</Link></li>
+              <li><Link href="/" className="hover:text-primary-600 transition-colors">Kariéra</Link></li>
+              <li><Link href="/#konzultace" className="hover:text-primary-600 transition-colors">Kontakt / Konzultace</Link></li>
+              <li><Link href="/" className="hover:text-primary-600 transition-colors">Partneři</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-slate-900 font-bold mb-4">Zdroje</h4>
             <ul className="space-y-3">
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Blog</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Nápověda</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">Webináře</Link></li>
-              <li><Link href="#" className="hover:text-primary-600 transition-colors">API Dokumentace</Link></li>
+              <li><Link href="/" className="hover:text-primary-600 transition-colors">Blog</Link></li>
+              <li><Link href="/" className="hover:text-primary-600 transition-colors">Nápověda</Link></li>
+              <li><Link href="/" className="hover:text-primary-600 transition-colors">Webináře</Link></li>
+              <li><Link href="/integrace" className="hover:text-primary-600 transition-colors">Integrace & API</Link></li>
             </ul>
           </div>
         </div>

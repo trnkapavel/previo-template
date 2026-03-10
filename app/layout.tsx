@@ -14,7 +14,13 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: 'Previo | Moderní hotelový systém',
-  description: 'Komplexní systém pro řízení hotelů a penzionů. Vše, co potřebujete pro úspěšné řízení ubytování.',
+  description: 'Komplexní systém pro řízení hotelů a penzionů. PMS, channel manager, rezervační systém, Alfred a weby. Vše na jednom místě.',
+  openGraph: {
+    title: 'Previo | Moderní hotelový systém',
+    description: 'Komplexní systém pro řízení hotelů a penzionů. Přidejte se k více než 4 000 spokojeným ubytovatelům.',
+    type: 'website',
+    locale: 'cs_CZ',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

@@ -14,8 +14,12 @@ export default function Home() {
     <main className="min-h-screen bg-white selection:bg-primary-100 selection:text-primary-900">
       <Navbar />
       <Hero />
-      <StatsSection />
-      <ProductCards />
+      <section id="statistiky" aria-label="Statistiky">
+        <StatsSection />
+      </section>
+      <section id="produkty" aria-label="Produkty">
+        <ProductCards />
+      </section>
       <Testimonial />
       <SupportSection />
       <WhyPrevio />

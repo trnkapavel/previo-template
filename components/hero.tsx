@@ -7,6 +7,7 @@ import {
   Smartphone, TrendingUp, BarChart2, MessageSquare, CalendarCheck, Users, ChevronDown,
 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 
 type Overlay = {
@@ -25,7 +26,7 @@ const slides = [
     title: "Spravujte svůj hotel, penzion i apartmány z jednoho místa",
     description: "Přidejte se k více jak 4 000 spokojeným klientům. Previo je nejpoužívanější hotelový systém v Česku.",
     buttonText: "Zjistěte více",
-    buttonHref: "#",
+    buttonHref: "/pms",
     image: '/img/hero-1.png',
     icons: [
       { icon: Hotel, label: "Hotely" },
@@ -44,7 +45,7 @@ const slides = [
     title: "Pořiďte si majordoma, který pracuje nonstop.",
     description: "Ulehčete své recepci automatizací check-in a check-out. Nechte webovou aplikaci Alfred pracovat za Vás.",
     buttonText: "Zjistěte více",
-    buttonHref: "#",
+    buttonHref: "/alfred",
     image: '/img/hero-2.png',
     icons: [
       { icon: UserCheck, label: "Self check-in" },
@@ -63,7 +64,7 @@ const slides = [
     title: "Zvyšte přímé rezervace z vlastního webu",
     description: "Rychlý web a rezervační systém, který hostům nekomplikuje cestu. Vyšší konverze, méně provizí.",
     buttonText: "Zjistěte více",
-    buttonHref: "#",
+    buttonHref: "/webove-stranky",
     image: '/img/hero-3.png',
     icons: [
       { icon: Globe, label: "Vlastní web" },
@@ -82,7 +83,7 @@ const slides = [
     title: "Mějte ceny a dostupnost pod kontrolou všude",
     description: "Napojte prodejní kanály do jednoho místa a spravujte ceníky i restrikce bez přepisování. Méně chyb, méně overbookingu.",
     buttonText: "Zjistěte více",
-    buttonHref: "#",
+    buttonHref: "/channel-manager",
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&auto=format',
     icons: [
       { icon: Layers, label: "Více kanálů" },
@@ -101,7 +102,7 @@ const slides = [
     title: "Uvolněte recepci díky automatizaci",
     description: "Zautomatizujte rutiny, které berou čas: komunikaci, platby, check-in i doklady. Vy se soustředíte na hosty, ne na tabulky.",
     buttonText: "Zjistěte více",
-    buttonHref: "#",
+    buttonHref: "/hotelova-automatizace",
     image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=800&fit=crop&auto=format',
     objectPosition: 'center 30%',
     icons: [
@@ -234,14 +235,25 @@ export function Hero() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
-                  <a
-                    href={slide.buttonHref}
-                    data-hero-primary
-                    className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center justify-center gap-2 group"
-                  >
-                    <span data-hero-primary-text>{slide.buttonText}</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  {slide.buttonHref.startsWith('/') ? (
+                    <Link
+                      href={slide.buttonHref}
+                      data-hero-primary
+                      className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center justify-center gap-2 group"
+                    >
+                      <span data-hero-primary-text>{slide.buttonText}</span>
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  ) : (
+                    <a
+                      href={slide.buttonHref}
+                      data-hero-primary
+                      className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center justify-center gap-2 group"
+                    >
+                      <span data-hero-primary-text>{slide.buttonText}</span>
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  )}
                   <button className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-[3px] font-medium text-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group">
                     <div className="relative w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
                       <span className="absolute inset-0 rounded-full border border-primary-300 animate-ping opacity-0 group-hover:opacity-60" />
