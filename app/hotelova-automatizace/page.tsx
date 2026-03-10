@@ -2,6 +2,9 @@ import { Navbar } from '@/components/navbar';
 import { ConsultationSection } from '@/components/consultation-section';
 import { Footer } from '@/components/footer';
 import { AutomationIllustration } from '@/components/illustrations/AutomationIllustration';
+import { IllustrationPlaceholder } from '@/components/illustrations/IllustrationPlaceholder';
+import { IntegrationsScene } from '@/components/illustrations/IntegrationsScene';
+import { MobileAppScene } from '@/components/illustrations/MobileAppScene';
 
 export default function AutomationPage() {
   return (
@@ -28,7 +31,7 @@ export default function AutomationPage() {
               provoz. Informace z propojených technologií uvidíte přímo v recepčním systému, který zároveň řídí jejich
               chování.
             </p>
-            <button className="inline-flex px-8 py-3 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
+            <button className="inline-flex px-8 py-4 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
               Konzultace zdarma
             </button>
           </div>
@@ -48,25 +51,25 @@ export default function AutomationPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 flex flex-col gap-2">
             <h3 className="font-semibold text-slate-900">Chytré kliky</h3>
-            <button className="self-start text-xs font-medium text-primary-600 hover:text-primary-700">
+            <button className="self-start text-sm font-medium text-primary-600 hover:text-primary-700">
               Více o klikách
             </button>
           </div>
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 flex flex-col gap-2">
             <h3 className="font-semibold text-slate-900">Keyguru box</h3>
-            <button className="self-start text-xs font-medium text-primary-600 hover:text-primary-700">
+            <button className="self-start text-sm font-medium text-primary-600 hover:text-primary-700">
               Více o boxech
             </button>
           </div>
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 flex flex-col gap-2">
             <h3 className="font-semibold text-slate-900">Recepční kiosek</h3>
-            <button className="self-start text-xs font-medium text-primary-600 hover:text-primary-700">
+            <button className="self-start text-sm font-medium text-primary-600 hover:text-primary-700">
               Více o kiosku
             </button>
           </div>
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 flex flex-col gap-2">
             <h3 className="font-semibold text-slate-900">Aplikace Alfred</h3>
-            <button className="self-start text-xs font-medium text-primary-600 hover:text-primary-700">
+            <button className="self-start text-sm font-medium text-primary-600 hover:text-primary-700">
               Více o Alfredovi
             </button>
           </div>
@@ -87,12 +90,12 @@ export default function AutomationPage() {
               <p className="leading-relaxed mb-3">
                 O kompletní správu přístupu se postará Previo. Doporučujeme zámkový systém Smartkey.
               </p>
-              <button className="inline-flex px-4 py-2 rounded-[3px] border border-primary-600 text-primary-700 text-xs font-medium hover:bg-primary-50 transition-colors">
+              <button className="inline-flex px-5 py-2.5 rounded-[3px] border border-primary-600 text-primary-700 text-sm font-medium hover:bg-primary-50 transition-colors">
                 Seznam integrovaných zámkových systémů
               </button>
             </div>
-            <div className="md:w-1/2 rounded-2xl border border-slate-200 bg-white h-64 flex items-center justify-center text-slate-400">
-              Chytrá klika na dveřích
+            <div className="md:w-1/2 rounded-2xl border border-slate-200 bg-white h-64 flex items-center justify-center overflow-hidden">
+              <IntegrationsScene />
             </div>
           </div>
 
@@ -109,8 +112,8 @@ export default function AutomationPage() {
                 Previo.
               </p>
             </div>
-            <div className="md:w-1/2 rounded-2xl border border-slate-200 bg-white h-64 flex items-center justify-center text-slate-400">
-              Skříňka Keyguru na stěně
+            <div className="md:w-1/2 rounded-2xl border border-slate-200 bg-white h-64 flex items-center justify-center overflow-hidden">
+              <IntegrationsScene />
             </div>
           </div>
 
@@ -126,8 +129,8 @@ export default function AutomationPage() {
                 Uvažujete o recepčním kiosku? Ozvěte se nám – poradíme s výběrem, aby Alfred na kiosku dobře fungoval.
               </p>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-white h-64 flex items-center justify-center text-slate-400">
-              Stojanový dotykový kiosek
+            <div className="rounded-2xl border border-slate-200 bg-white h-64 flex items-center justify-center overflow-hidden">
+              <MobileAppScene />
             </div>
           </div>
 
@@ -147,13 +150,13 @@ export default function AutomationPage() {
               </p>
               <a
                 href="/alfred"
-                className="inline-flex px-4 py-2 rounded-[3px] border border-primary-600 text-primary-700 text-xs font-medium hover:bg-primary-50 transition-colors"
+                className="inline-flex px-5 py-2.5 rounded-[3px] border border-primary-600 text-primary-700 text-sm font-medium hover:bg-primary-50 transition-colors"
               >
                 Podrobně o Alfredovi
               </a>
             </div>
-            <div className="order-1 md:order-2 rounded-2xl border border-slate-200 bg-white h-64 flex items-center justify-center text-slate-400">
-              Náhled aplikace Alfred
+            <div className="order-1 md:order-2 rounded-2xl border border-slate-200 bg-white h-64 flex items-center justify-center overflow-hidden">
+              <MobileAppScene />
             </div>
           </div>
         </div>

@@ -28,7 +28,7 @@ export default function WebsitesPage() {
               úspěch je proto klíčové, jak vypadají a fungují. Vytvoříme web s ověřeným designem, který s úspěchem
               využívají stovky ubytovacích zařízení.
             </p>
-            <button className="inline-flex px-8 py-3 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
+            <button className="inline-flex px-8 py-4 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
               Nezávazně poptat
             </button>
           </div>
@@ -80,7 +80,7 @@ export default function WebsitesPage() {
                 Máme desítky bloků, ze kterých si můžete poskládat web, nebo návrh necháte na našich konzultantech.
                 Inspirujte se referenčními weby.
               </p>
-              <button className="mt-4 inline-flex px-4 py-2 rounded-[3px] border border-primary-600 text-primary-700 text-xs font-medium hover:bg-primary-50 transition-colors">
+              <button className="mt-4 inline-flex px-6 py-3 rounded-[3px] border border-primary-600 text-primary-700 text-sm font-medium hover:bg-primary-50 transition-colors">
                 Prohlédnout referenční weby
               </button>
             </div>
@@ -157,7 +157,7 @@ export default function WebsitesPage() {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <button className="inline-flex px-8 py-3 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
+          <button className="inline-flex px-8 py-4 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
             Nezávazně poptat
           </button>
         </div>

@@ -217,7 +217,7 @@ export function ConsultationSection() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-[3px] bg-primary-500 text-white text-base font-medium hover:bg-primary-400 hover:shadow-lg hover:shadow-primary-500/20 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {status === 'loading' ? (
                   <>

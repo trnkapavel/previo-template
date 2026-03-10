@@ -81,7 +81,7 @@ export default function IntegrationsPage() {
       </section>
 
       {/* Filtrace + katalog */}
-      <section className="py-10 md:py-16 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-2 mb-8">
             {CATEGORIES.map((category, idx) => (
@@ -120,7 +120,7 @@ export default function IntegrationsPage() {
                 </div>
                 <p className="text-[11px] uppercase tracking-widest text-slate-400">{integration.category}</p>
                 <p className="text-sm text-slate-600 flex-1">{integration.description}</p>
-                <button className="mt-2 inline-flex self-start text-xs font-medium text-primary-600 hover:text-primary-700">
+                <button className="mt-2 inline-flex self-start px-5 py-2.5 rounded-[3px] border border-primary-600 text-primary-700 text-sm font-medium hover:bg-primary-50 transition-colors">
                   Navštívit web
                 </button>
               </article>

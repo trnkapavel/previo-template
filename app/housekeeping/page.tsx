@@ -28,7 +28,7 @@ export default function HousekeepingPage() {
               Aplikace umožňuje také reportování závad na pokojích včetně fotografií, takže máte o stavu pokojů vždy
               přesnou a aktuální informaci.
             </p>
-            <button className="inline-flex px-8 py-3 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
+            <button className="inline-flex px-8 py-4 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
               Konzultace zdarma
             </button>
           </div>

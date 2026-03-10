@@ -23,7 +23,7 @@ export default function ScanIdPage() {
               Představujeme aplikaci ScanID, která vám umožní pomocí mobilního telefonu automaticky načítat osobní
               doklady. Strojové čtení občanských průkazů i pasů snižuje chybovost v zápise údajů do karty hosta.
             </p>
-            <button className="inline-flex px-8 py-3 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
+            <button className="inline-flex px-8 py-4 rounded-[3px] bg-primary-600 text-white text-base font-medium hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-600/20 transition-all">
               Konzultace zdarma
             </button>
           </div>
