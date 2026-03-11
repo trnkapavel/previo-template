@@ -84,7 +84,7 @@ const slides = [
     description: "Napojte prodejní kanály do jednoho místa a spravujte ceníky i restrikce bez přepisování. Méně chyb, méně overbookingu.",
     buttonText: "Zjistěte více",
     buttonHref: "/channel-manager",
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&auto=format',
+    image: '/img/hero-4.png',
     icons: [
       { icon: Layers, label: "Více kanálů" },
       { icon: BarChart2, label: "Přehled cen" },
@@ -103,7 +103,7 @@ const slides = [
     description: "Zautomatizujte rutiny, které berou čas: komunikaci, platby, check-in i doklady. Vy se soustředíte na hosty, ne na tabulky.",
     buttonText: "Zjistěte více",
     buttonHref: "/hotelova-automatizace",
-    image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=800&fit=crop&auto=format',
+    image: '/img/hero-5.png',
     objectPosition: 'center 30%',
     icons: [
       { icon: Zap, label: "Automatizace" },
@@ -123,7 +123,7 @@ const slides = [
     description: "Jsme k dispozici 7 dní v týdnu. Když hoří provoz, potřebujete rychlou odpověď a člověka, který zná hotely.",
     buttonText: "+420 251 613 924",
     buttonHref: "tel:+420251613924",
-    image: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1200&h=800&fit=crop&auto=format',
+    image: '/img/hero-6.png',
     icons: [
       { icon: Headphones, label: "7/7 podpora" },
       { icon: Phone, label: "Telefon" },
@@ -144,7 +144,6 @@ const SLIDE_DURATION = 8000;
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [borderVisible, setBorderVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef(0);
 
@@ -156,12 +155,6 @@ export function Hero() {
     }, SLIDE_DURATION);
     return () => clearInterval(timer);
   }, [isPaused]);
-
-  // Border reveal after photo loads
-  useEffect(() => {
-    const t = setTimeout(() => setBorderVisible(true), 1100);
-    return () => clearTimeout(t);
-  }, []);
 
   // Mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -254,13 +247,15 @@ export function Hero() {
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </a>
                   )}
-                  <button className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-[3px] font-medium text-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group">
-                    <div className="relative w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
-                      <span className="absolute inset-0 rounded-full border border-primary-300 animate-ping opacity-0 group-hover:opacity-60" />
-                      <Play className="w-3 h-3 text-slate-600 group-hover:text-primary-600 relative z-10" fill="currentColor" />
-                    </div>
-                    Přehrát video
-                  </button>
+                  {currentSlide === 0 && (
+                    <button className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-[3px] font-medium text-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group">
+                      <div className="relative w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
+                        <span className="absolute inset-0 rounded-full border border-primary-300 animate-ping opacity-0 group-hover:opacity-60" />
+                        <Play className="w-3 h-3 text-slate-600 group-hover:text-primary-600 relative z-10" fill="currentColor" />
+                      </div>
+                      Přehrát video
+                    </button>
+                  )}
                 </div>
 
                 {/* Feature tags */}
@@ -326,16 +321,8 @@ export function Hero() {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            {/* Decorative offset border */}
-            <motion.div
-              animate={{ opacity: borderVisible ? 1 : 0 }}
-              transition={{ duration: 0.4 }}
-              style={{ x: 14, y: 14 }}
-              className="absolute inset-0 rounded-tl-[114px] rounded-tr-[17px] rounded-bl-[17px] rounded-br-[114px] border-2 border-slate-300 z-0"
-            />
-
             {/* Photo */}
-            <div className="group relative w-full aspect-[4/3] lg:aspect-auto lg:h-full rounded-tl-[100px] rounded-tr-[3px] rounded-bl-[3px] rounded-br-[100px] overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
+            <div className="group relative w-full aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
