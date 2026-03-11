@@ -60,9 +60,9 @@ export default function PmsPage() {
           </Body>
         </div>
 
-        <div className="space-y-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="space-y-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Interaktivní plachta rezervací */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">
                 Interaktivní plachta rezervací
@@ -80,7 +80,7 @@ export default function PmsPage() {
           </div>
 
           {/* Dashboard */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Dashboard</Subheading>
               <Body>
@@ -94,7 +94,7 @@ export default function PmsPage() {
           </div>
 
           {/* Legislativní povinnosti */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">
                 Na legislativní povinnosti už nemusíte myslet
@@ -115,7 +115,7 @@ export default function PmsPage() {
           </div>
 
           {/* Reporty */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">
                 Reporty – data, která pracují pro vás
@@ -132,7 +132,7 @@ export default function PmsPage() {
           </div>
 
           {/* Integrace */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Integrace</Subheading>
               <Body className="mb-4">
@@ -152,7 +152,7 @@ export default function PmsPage() {
           </div>
 
           {/* Stále v pohybu */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Stále v pohybu</Subheading>
               <Body>
@@ -166,7 +166,7 @@ export default function PmsPage() {
           </div>
 
           {/* Efektivnější úklid */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Efektivnější úklid</Subheading>
               <Body>
@@ -180,7 +180,7 @@ export default function PmsPage() {
           </div>
 
           {/* Doklady a faktury */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Doklady a faktury</Subheading>
               <Body>
@@ -195,7 +195,7 @@ export default function PmsPage() {
           </div>
 
           {/* Drobný prodej a sklad */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">
                 Drobný prodej a kusový sklad
@@ -211,7 +211,7 @@ export default function PmsPage() {
           </div>
 
           {/* Automatická komunikace */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">
                 Automatická komunikace s hostem

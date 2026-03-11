@@ -34,7 +34,7 @@ export function WhyPrevio() {
   return (
     <section data-export-section="why-previo" className="py-20 bg-white relative overflow-hidden" id="proc-previo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid lg:grid-cols-12 gap-16 items-start">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
           
           {/* Left Column: Text Content */}
           <div className="lg:col-span-5 lg:sticky lg:top-32">

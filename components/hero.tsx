@@ -36,7 +36,6 @@ const slides: Array<{
   buttonText: string;
   buttonHref: string;
   image: string;
-  objectPosition?: string;
   icons: Array<{ icon: React.ElementType; label: string }>;
   overlays: Overlay[];
   kpis: [HeroKpi, HeroKpi, HeroKpi];
@@ -144,7 +143,6 @@ const slides: Array<{
     buttonText: "Zjistěte více",
     buttonHref: "/hotelova-automatizace",
     image: '/img/hero-5.png',
-    objectPosition: 'center 30%',
     icons: [
       { icon: Zap, label: "Automatizace" },
       { icon: MessageSquare, label: "Komunikace" },
@@ -286,7 +284,7 @@ export function Hero() {
     <section
       data-export-section="hero"
       data-hero-slider="light"
-      className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden"
+      className="relative pt-24 pb-12 md:pt-28 md:pb-20 overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -306,9 +304,10 @@ export function Hero() {
       <div className="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-primary-100/30 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-0 lg:gap-0 items-stretch lg:min-h-[520px] lg:h-[560px]">
-          {/* ── Left column: červený blok – stejná výška jako pravý ── */}
-          <div className="bg-primary-600 rounded-r-[3px] lg:rounded-l-[3px] lg:rounded-r-none px-6 py-12 md:px-10 md:py-16 lg:py-20 flex flex-col justify-center z-20 min-h-0">
+        {/* Na mobilu grid bez bočního paddingu = červený blok + obrázek celou šířkou */}
+        <div className="grid lg:grid-cols-2 gap-y-0 lg:gap-x-0 items-stretch lg:min-h-[480px] lg:h-[520px] -mx-4 sm:-mx-6 lg:mx-0">
+          {/* ── Left column: červený blok – na mobilu nahoře zaoblený, dole rovný (navazuje obrázek) ── */}
+          <div className="bg-primary-600 rounded-t-2xl lg:rounded-l-2xl lg:rounded-tr-none lg:rounded-br-none px-6 md:px-10 lg:px-10 lg:pr-4 py-8 md:py-14 lg:py-16 flex flex-col justify-center z-20 min-h-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -319,7 +318,7 @@ export function Hero() {
                 className="text-left"
               >
                 {/* Badge */}
-                <div className="inline-flex items-center gap-2 text-sm font-medium mb-6 text-white/90">
+                <div className="inline-flex items-center gap-2 text-sm font-medium mb-4 md:mb-5 text-white/90">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/80 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
@@ -329,14 +328,14 @@ export function Hero() {
 
                 <h1
                   data-hero-title
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold font-outfit tracking-tight text-white mb-5 leading-[1.1] h-[2.2em] overflow-hidden line-clamp-2"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold font-outfit tracking-tight text-white mb-4 md:mb-5 leading-[1.1] h-[2.2em] overflow-hidden line-clamp-2"
                 >
                   {slide.title}
                 </h1>
 
                 <p
                   data-hero-description
-                  className="text-base md:text-lg text-white/90 mb-8 leading-relaxed"
+                  className="text-base md:text-lg text-white/90 mb-6 md:mb-7 leading-relaxed"
                 >
                   {slide.description}
                 </p>
@@ -372,7 +371,7 @@ export function Hero() {
                 </div>
 
                 {/* Feature tags – bílé ikony a text, hover animace */}
-                <div className="mt-10 flex flex-wrap gap-5">
+                <div className="mt-5 md:mt-6 lg:mt-8 flex flex-wrap gap-4 lg:gap-5">
                   {slide.icons.map((item, idx) => (
                     <motion.div
                       key={idx}
@@ -394,8 +393,8 @@ export function Hero() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Progress dots – uvnitř červeného bloku */}
-            <div className="mt-10 flex gap-3 items-center">
+            {/* Progress dots – pouze desktop; na mobilu je málo místa, ovládání swipe ── */}
+            <div className="hidden lg:flex mt-6 gap-3 items-center">
               {slides.map((_, idx) => (
                 <button
                   key={idx}
@@ -424,17 +423,17 @@ export function Hero() {
             </div>
           </div>
 
-          {/* ── Right column — bílý panel s obrázkem ── */}
+          {/* ── Right column — na mobilu obrázek celou šířkou pod červeným blokem, na desktopu panel vedle ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="relative bg-white flex flex-col px-6 lg:px-10 py-0 h-full min-h-0"
+            className="relative bg-white flex flex-col px-0 lg:px-10 lg:pl-4 py-0 h-full min-h-0"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            {/* Photo – vyplní celou výšku pravého bloku (bez aspect ratio, aby byl stejně vysoký jako levý) */}
-            <div className="group relative w-full flex-1 min-h-[260px] min-w-0 overflow-hidden rounded-[3px] shadow-2xl shadow-slate-200/50 z-10">
+            {/* Photo – na mobilu celá šířka, lehký rozestup od červeného bloku; na desktopu jako dřív */}
+            <div className="group relative w-full flex-1 min-h-[240px] sm:min-h-[280px] min-w-0 overflow-hidden rounded-none rounded-b-2xl lg:rounded-[3px] shadow-2xl shadow-slate-200/50 z-10 mt-2 lg:mt-0">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -451,8 +450,7 @@ export function Hero() {
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    style={{ objectPosition: ('objectPosition' in slide ? slide.objectPosition : 'center') as string }}
+                    className="object-cover object-top md:object-center transition-transform duration-700 ease-out group-hover:scale-105"
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
@@ -462,8 +460,8 @@ export function Hero() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent z-10 pointer-events-none" />
             </div>
 
-            {/* Overlay info bubbles */}
-            <div className="absolute inset-0 z-20 pointer-events-none">
+            {/* Overlay info bubbles – jen na desktopu, na mobilu by překrývaly */}
+            <div className="absolute inset-0 z-20 pointer-events-none hidden lg:block">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -522,9 +520,9 @@ export function Hero() {
         </div>
 
         {/* KPI sekce – animované grafy podle aktivního slidu */}
-        <div className="bg-white pt-12 pb-8 md:pt-14 md:pb-10">
+        <div className="bg-white pt-10 pb-8 md:pt-12 md:pb-10">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 justify-items-center mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 justify-items-center mb-8">
               <AnimatePresence mode="wait">
                 {slide.kpis.map((kpi, idx) => (
                   <motion.div
@@ -554,7 +552,7 @@ export function Hero() {
 
         {/* Scroll indicator */}
         <motion.div
-          className="flex flex-col items-center mt-12 gap-1 text-slate-400 cursor-default select-none"
+          className="flex flex-col items-center mt-8 gap-1 text-slate-400 cursor-default select-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 0.6 }}

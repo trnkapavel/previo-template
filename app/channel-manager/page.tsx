@@ -41,7 +41,7 @@ export default function ChannelManagerPage() {
       {/* Hero */}
       <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-slate-50 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 items-center">
           <div>
             <Eyebrow className="mb-4">Distribuce na portály</Eyebrow>
             <PageTitle className="mb-6">Channel manager</PageTitle>
@@ -62,9 +62,9 @@ export default function ChannelManagerPage() {
 
       {/* Sekce funkcí */}
       <section className="py-14 md:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Více portálů, více rezervací */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">
                 Získejte větší počet rezervací prodejem na více portálech
@@ -89,7 +89,7 @@ export default function ChannelManagerPage() {
           </div>
 
           {/* Automatický přenos dat */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Automatický přenos dat</Subheading>
               <Body className="mb-4">
@@ -112,7 +112,7 @@ export default function ChannelManagerPage() {
           </div>
 
           {/* Ceny a obsazenost z jednoho místa */}
-          <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
               <Subheading className="mb-3">Ceny a obsazenost z jednoho místa</Subheading>
               <Body>
@@ -127,7 +127,7 @@ export default function ChannelManagerPage() {
           </div>
 
           {/* Revenue management */}
-          <div className="grid md:grid-cols-2 gap-10 items-center md:flex-row-reverse">
+          <div className="grid md:grid-cols-2 gap-6 items-center md:flex-row-reverse">
             <div className="order-2 md:order-1">
               <Subheading className="mb-3">Více času na Revenue management</Subheading>
               <Body className="mb-4">

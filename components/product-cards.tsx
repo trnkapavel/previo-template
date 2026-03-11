@@ -215,7 +215,7 @@ function ProductCard({ product, index, isLast }: { product: typeof products[0]; 
           hasShadow ? 'shadow-xl shadow-slate-200/50' : 'shadow-none'
         }`}
       >
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:h-full">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-6 items-center lg:h-full">
           {/* Content */}
           <div className="order-2 lg:order-1">
             <div className="mb-8">
@@ -227,7 +227,7 @@ function ProductCard({ product, index, isLast }: { product: typeof products[0]; 
               </h4>
             </div>
 
-            <div className="space-y-4 lg:space-y-8 mb-6 lg:mb-10">
+            <div className="space-y-4 lg:space-y-6 mb-6 lg:mb-10">
               {product.features.map((feature, fIdx) => (
                 <div key={fIdx} className="flex gap-4 group/feature">
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/feature:bg-white group-hover/feature:shadow-md transition-all">

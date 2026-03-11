@@ -55,9 +55,9 @@ export default function AlfredPage() {
 
       {/* Funkce */}
       <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* Online check‑in */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Online check‑in</Subheading>
               <Body>
@@ -72,7 +72,7 @@ export default function AlfredPage() {
           </div>
 
           {/* Digitální podpis */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Digitální podpis</Subheading>
               <Body>
@@ -87,7 +87,7 @@ export default function AlfredPage() {
           </div>
 
           {/* Klíč od pokoje */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Klíč od pokoje</Subheading>
               <Body>
@@ -101,7 +101,7 @@ export default function AlfredPage() {
           </div>
 
           {/* Dokoupení služeb */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Dokoupení služeb</Subheading>
               <Body>
@@ -115,7 +115,7 @@ export default function AlfredPage() {
           </div>
 
           {/* Platby */}
-          <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
               <Subheading className="mb-3">Platby</Subheading>
               <Body>
@@ -130,7 +130,7 @@ export default function AlfredPage() {
           </div>
 
           {/* Hotel a okolí */}
-          <div className="grid md:grid-cols-2 gap-10 items-center md:flex-row-reverse">
+          <div className="grid md:grid-cols-2 gap-6 items-center md:flex-row-reverse">
             <div className="order-2 md:order-1">
               <Subheading className="mb-3">Hotel a okolí</Subheading>
               <Body>
@@ -144,7 +144,7 @@ export default function AlfredPage() {
           </div>
 
           {/* Green Option */}
-          <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
               <Subheading className="mb-3">Green Option – myslíme na budoucnost</Subheading>
               <Body>
@@ -158,7 +158,7 @@ export default function AlfredPage() {
           </div>
 
           {/* Jedna technologie více možností */}
-          <div className="grid md:grid-cols-2 gap-10 items-center md:flex-row-reverse">
+          <div className="grid md:grid-cols-2 gap-6 items-center md:flex-row-reverse">
             <div className="order-2 md:order-1">
               <Subheading className="mb-3">Jedna technologie, více možností</Subheading>
               <Body className="mb-3">

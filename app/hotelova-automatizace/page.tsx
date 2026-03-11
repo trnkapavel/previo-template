@@ -14,7 +14,7 @@ export default function AutomationPage() {
       {/* Hero */}
       <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 bg-slate-50 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 items-center">
           <div>
             <p className="text-sm font-medium text-primary-700 mb-4 uppercase tracking-widest">
               Automatizace provozu
@@ -78,9 +78,9 @@ export default function AutomationPage() {
 
       {/* Detailní podsekce */}
       <section className="py-16 md:py-20 bg-slate-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 text-sm text-slate-700">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-sm text-slate-700">
           {/* Chytré kliky */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-3">Chytré kliky</h2>
               <p className="leading-relaxed mb-3">
@@ -100,7 +100,7 @@ export default function AutomationPage() {
           </div>
 
           {/* Elektronické boxy */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-3">Elektronické boxy</h2>
               <p className="leading-relaxed mb-3">
@@ -118,7 +118,7 @@ export default function AutomationPage() {
           </div>
 
           {/* Recepční kiosek */}
-          <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
               <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-3">Recepční kiosek</h2>
               <p className="leading-relaxed mb-3">
@@ -135,7 +135,7 @@ export default function AutomationPage() {
           </div>
 
           {/* Virtuální recepční Alfred */}
-          <div className="grid md:grid-cols-2 gap-10 items-center md:flex-row-reverse">
+          <div className="grid md:grid-cols-2 gap-6 items-center md:flex-row-reverse">
             <div className="order-2 md:order-1">
               <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-3">
                 Virtuální recepční Alfred

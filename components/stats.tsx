@@ -56,7 +56,7 @@ export function StatsSection() {
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
+        <div className="grid md:grid-cols-3 gap-6 mt-16">
           {/* Box 1 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -141,6 +141,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeMobileItem, setActiveMobileItem] = useState<string | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -177,6 +178,11 @@ export function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white md:bg-white/80 md:backdrop-blur-md border-b border-slate-200/50 py-3' : 'bg-transparent py-5'
       }`}
+      style={{
+        paddingTop: 'max(0.75rem, env(safe-area-inset-top))',
+        paddingLeft: 'max(1rem, env(safe-area-inset-left))',
+        paddingRight: 'max(1rem, env(safe-area-inset-right))',
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -283,7 +289,7 @@ export function Navbar() {
             onMouseEnter={() => openMenu(activeMegaItem.label)}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-              <div className="flex gap-8">
+              <div className="flex gap-6">
                 {/* Featured Cards Column */}
                 <div className="w-[280px] shrink-0 flex flex-col gap-3">
                   {(activeMegaItem.dropdown as MegaMenuContent).featuredCards.map((card) => (
@@ -346,7 +352,7 @@ export function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu – generované z NAV_ITEMS jako akordeon */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -356,18 +362,149 @@ export function Navbar() {
             className="absolute top-full left-0 right-0 bg-white border-b border-slate-200 shadow-lg lg:hidden"
           >
             <div className="px-4 py-6 flex flex-col gap-4">
-              <Link href="#produkty" className="text-base font-medium text-slate-900" onClick={() => setIsMobileMenuOpen(false)}>Produkty</Link>
-              <Link href="#reference" className="text-base font-medium text-slate-900" onClick={() => setIsMobileMenuOpen(false)}>Reference</Link>
-              <Link href="#cenik" className="text-base font-medium text-slate-900" onClick={() => setIsMobileMenuOpen(false)}>Ceník</Link>
-              <Link href="#o-nas" className="text-base font-medium text-slate-900" onClick={() => setIsMobileMenuOpen(false)}>O nás</Link>
-              <Link href="#akademie" className="text-base font-medium text-slate-900" onClick={() => setIsMobileMenuOpen(false)}>Akademie</Link>
-              <Link href="#kontakty" className="text-base font-medium text-slate-900" onClick={() => setIsMobileMenuOpen(false)}>Kontakty</Link>
-              <Link href="#blog" className="text-base font-medium text-slate-900" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
-              <hr className="border-slate-100 my-2" />
-              <Link href="#login" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-slate-700 bg-white border border-slate-300 rounded-[3px]">Přihlásit</Link>
+              {NAV_ITEMS.map((item) => {
+                const dropdown = item.dropdown;
+                const isAccordionOpen = activeMobileItem === item.label;
+
+                // Jednoduchý odkaz bez dropdownu
+                if (!dropdown && item.href) {
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className="text-base font-medium text-slate-900"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setActiveMobileItem(null);
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+
+                // Položka s dropdownem (simple nebo mega)
+                if (dropdown) {
+                  return (
+                    <div key={item.label} className="border-t border-slate-100 first:border-t-0 pt-3">
+                      <button
+                        className="w-full flex items-center justify-between text-base font-medium text-slate-900"
+                        onClick={() =>
+                          setActiveMobileItem((prev) => (prev === item.label ? null : item.label))
+                        }
+                      >
+                        <span>{item.label}</span>
+                        <motion.span
+                          animate={{ rotate: isAccordionOpen ? 180 : 0 }}
+                          transition={{ duration: 0.15, ease: 'easeOut' }}
+                          className="inline-flex text-slate-500"
+                        >
+                          <ChevronDown className="w-4 h-4" />
+                        </motion.span>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isAccordionOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -4 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -4 }}
+                            transition={{ duration: 0.15, ease: 'easeOut' }}
+                            className="mt-2 space-y-3 pl-2 border-l border-slate-100"
+                          >
+                            {dropdown.type === 'simple' && (
+                              <div className="space-y-1">
+                                {dropdown.links.map((link) => (
+                                  <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    className="block text-sm text-slate-600 hover:text-slate-900"
+                                    onClick={() => {
+                                      setIsMobileMenuOpen(false);
+                                      setActiveMobileItem(null);
+                                    }}
+                                  >
+                                    {link.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+
+                            {dropdown.type === 'mega' && (
+                              <div className="space-y-4">
+                                {/* Featured cards jako zvýrazněné položky */}
+                                {dropdown.featuredCards.length > 0 && (
+                                  <div className="space-y-2">
+                                    {dropdown.featuredCards.map((card) => (
+                                      <Link
+                                        key={card.href}
+                                        href={card.href}
+                                        onClick={() => {
+                                          setIsMobileMenuOpen(false);
+                                          setActiveMobileItem(null);
+                                        }}
+                                        className="block rounded-lg border border-slate-100 bg-slate-50 px-3 py-2"
+                                      >
+                                        <div className="text-sm font-semibold text-slate-900">
+                                          {card.title}
+                                        </div>
+                                        <div className="text-xs text-slate-600">
+                                          {card.description}
+                                        </div>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                )}
+
+                                {/* Skupiny odkazů */}
+                                {dropdown.groups.map((group) => (
+                                  <div key={group.heading}>
+                                    <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">
+                                      {group.heading}
+                                    </div>
+                                    <div className="space-y-1">
+                                      {group.links.map((link) => (
+                                        <Link
+                                          key={link.href}
+                                          href={link.href}
+                                          className="block text-sm text-slate-600 hover:text-slate-900"
+                                          onClick={() => {
+                                            setIsMobileMenuOpen(false);
+                                            setActiveMobileItem(null);
+                                          }}
+                                        >
+                                          {link.label}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
+
+                return null;
+              })}
+
+              <hr className="border-slate-100 my-3" />
+
+              {/* CTA tlačítka dole – stejné jako na desktopu, ale přes celou šířku */}
+              <Link
+                href="#login"
+                className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-slate-700 bg-white border border-slate-300 rounded-[3px]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Přihlásit
+              </Link>
               <Link
                 href="#demo"
                 className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-primary-600 rounded-[3px]"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Vyzkoušet zdarma
               </Link>

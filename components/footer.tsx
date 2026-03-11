@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer data-export-section="footer" className="bg-slate-100 text-slate-600 py-12 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-12">
           <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="flex items-center mb-6">
               <PrevioLogo className="h-10 w-auto" />

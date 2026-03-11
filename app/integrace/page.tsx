@@ -68,7 +68,7 @@ export default function IntegrationsPage() {
       {/* Hero */}
       <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-slate-50 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 items-center">
           <div>
             <Eyebrow className="mb-4">Marketplace integrací</Eyebrow>
             <PageTitle className="mb-6">Integrace a propojení na další systémy</PageTitle>
@@ -139,7 +139,7 @@ export default function IntegrationsPage() {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8">
+          <div className="grid lg:grid-cols-12 gap-6">
             {/* Sidebar filters (marketplace-like) */}
             <aside className="lg:col-span-3">
               <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">

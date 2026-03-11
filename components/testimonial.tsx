@@ -135,7 +135,7 @@ export function Testimonial() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center"
             >
               {/* Left side: Content */}
               <div className="relative">

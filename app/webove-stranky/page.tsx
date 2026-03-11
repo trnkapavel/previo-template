@@ -11,7 +11,7 @@ export default function WebsitesPage() {
       {/* Hero */}
       <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 bg-slate-50 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 items-center">
           <div>
             <p className="text-sm font-medium text-primary-700 mb-4 uppercase tracking-widest">
               Webové stránky pro ubytování
@@ -70,7 +70,7 @@ export default function WebsitesPage() {
           <h2 className="text-2xl md:text-3xl font-outfit font-bold text-slate-900 mb-10 text-center">
             Jak probíhá tvorba webu
           </h2>
-          <div className="grid md:grid-cols-3 gap-8 text-sm text-slate-700">
+          <div className="grid md:grid-cols-3 gap-6 text-sm text-slate-700">
             <div className="rounded-2xl bg-white border border-slate-200 p-6">
               <p className="text-xs font-semibold text-primary-600 mb-2 uppercase tracking-widest">Krok 1</p>
               <h3 className="text-lg font-semibold text-slate-900 mb-2">

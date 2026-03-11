@@ -19,7 +19,7 @@ export default function BookingEnginePage() {
       {/* Hero */}
       <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-slate-50 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 items-center">
           <div>
             <Eyebrow className="mb-4">Rezervační systém</Eyebrow>
             <PageTitle className="mb-6">Online rezervační formulář</PageTitle>
@@ -53,9 +53,9 @@ export default function BookingEnginePage() {
 
       {/* Sekce funkcí */}
       <section className="py-14 md:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           {/* On-line napojení */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">On-line napojení na recepční systém</Subheading>
               <Body className="mb-4">
@@ -73,7 +73,7 @@ export default function BookingEnginePage() {
           </div>
 
           {/* Minimální počet povinných položek */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Minimální počet povinných položek</Subheading>
               <Body>
@@ -89,7 +89,7 @@ export default function BookingEnginePage() {
           </div>
 
           {/* Platby */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Platby</Subheading>
               <Body className="mb-4">
@@ -108,7 +108,7 @@ export default function BookingEnginePage() {
           </div>
 
           {/* Napojení na další kanály */}
-          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div className="flex flex-col md:flex-row-reverse gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Napojení na další online prodejní kanály</Subheading>
               <Body className="mb-4">
@@ -125,7 +125,7 @@ export default function BookingEnginePage() {
           </div>
 
           {/* Prodej doplňkových služeb */}
-          <div className="flex flex-col md:flex-row gap-10 items-center">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
             <div className="md:w-1/2">
               <Subheading className="mb-3">Prodej doplňkových služeb</Subheading>
               <Body>
@@ -139,7 +139,7 @@ export default function BookingEnginePage() {
           </div>
 
           {/* Variabilní nastavení platby */}
-          <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
             <div className="order-2 md:order-1">
               <Subheading className="mb-3">Variabilní nastavení způsobu platby</Subheading>
               <Body>
@@ -154,7 +154,7 @@ export default function BookingEnginePage() {
           </div>
 
           {/* Online check-in */}
-          <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
               <Subheading className="mb-3">Online check‑in</Subheading>
               <Body className="mb-4">
@@ -183,7 +183,7 @@ export default function BookingEnginePage() {
             Získejte až o 30&nbsp;% více přímých rezervací díky promyšlenému rezervačnímu procesu.
           </Body>
         </div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6 text-center">
           <div>
             <p className="text-3xl md:text-4xl font-outfit font-semibold mb-2 text-white">329&nbsp;768</p>
             <p className="text-sm text-slate-300">
