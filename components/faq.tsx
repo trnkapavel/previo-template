@@ -35,7 +35,7 @@ export function FaqSection() {
   };
 
   return (
-    <section data-export-section="faq" className="py-24 bg-white relative overflow-hidden" id="faq">
+    <section data-export-section="faq" className="py-20 bg-white relative overflow-hidden" id="faq">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold font-outfit text-slate-900 mb-4">

@@ -21,7 +21,7 @@ function Counter({ value, duration = 2 }: { value: number; duration?: number }) 
 
 export function StatsSection() {
   return (
-    <section data-export-section="stats" className="py-24 bg-slate-50 relative overflow-hidden">
+    <section data-export-section="stats" className="py-20 bg-slate-50 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 relative">
           <motion.h2 

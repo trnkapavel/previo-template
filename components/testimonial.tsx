@@ -94,7 +94,7 @@ export function Testimonial() {
     <section
       data-export-section="testimonial"
       data-testimonial-slider="light"
-      className="py-24 bg-slate-50 overflow-hidden relative"
+      className="py-20 bg-slate-50 overflow-hidden relative"
       id="reference"
     >
       {/* Decorative background element */}

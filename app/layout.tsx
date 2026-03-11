@@ -1,4 +1,5 @@
 import type {Metadata} from 'next';
+import type {ReactNode} from 'react';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({children}: {children: ReactNode}) {
   return (
     <html lang="cs" className={`${inter.variable} ${outfit.variable}`}>
       <body className="font-sans antialiased text-slate-900 bg-white selection:bg-primary-100 selection:text-primary-900" suppressHydrationWarning>

@@ -52,7 +52,7 @@ export function ConsultationSection() {
     <section
       id="konzultace"
       aria-labelledby="consultation-heading"
-      className="relative py-16 md:py-20 bg-slate-900 text-white overflow-hidden"
+      className="relative py-14 md:py-16 bg-slate-900 text-white overflow-hidden"
     >
       {/* Dekorativní pozadí */}
       <div className="absolute inset-0 pointer-events-none -z-10">

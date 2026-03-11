@@ -42,6 +42,7 @@ const html = `<!doctype html>
     <script src="./exports/assets/hero-slider-light.js" defer></script>
     <script src="./exports/assets/testimonial-slider-light.js" defer></script>
     <script src="./exports/assets/stats-counters.js" defer></script>
+    <script src="./exports/assets/faq-toggle.js" defer></script>
   </head>
   <body class="bg-white min-h-screen font-sans antialiased text-slate-900">
     <main class="min-h-screen">

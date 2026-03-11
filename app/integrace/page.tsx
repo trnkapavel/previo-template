@@ -66,7 +66,7 @@ export default function IntegrationsPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 bg-slate-50 overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-slate-50 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -113,7 +113,7 @@ export default function IntegrationsPage() {
       </section>
 
       {/* Filtrace + katalog */}
-      <section id="katalog" className="py-20 md:py-24 bg-white">
+      <section id="katalog" className="py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
             <div>

@@ -27,7 +27,7 @@ export default function PaymentsPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 bg-slate-50 overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-slate-50 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -57,7 +57,7 @@ export default function PaymentsPage() {
       </section>
 
       {/* Výhody */}
-      <section className="py-20 md:py-24 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10">
           <div>
             <Subheading className="mb-4">Výhody platební brány</Subheading>
@@ -85,7 +85,7 @@ export default function PaymentsPage() {
       </section>
 
       {/* Terminál z mobilu */}
-      <section className="py-20 md:py-24 bg-slate-50">
+      <section className="py-16 md:py-20 bg-slate-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 items-center">
           <div>
             <SectionTitle className="mb-4">Terminál z mobilu</SectionTitle>

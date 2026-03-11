@@ -141,7 +141,7 @@ const products = [
 
 export function ProductCards() {
   return (
-    <section data-export-section="product-cards" className="py-24 bg-slate-50 relative" id="produkty">
+    <section data-export-section="product-cards" className="py-20 bg-slate-50 relative" id="produkty">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <motion.h2

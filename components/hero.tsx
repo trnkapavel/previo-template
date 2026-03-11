@@ -20,7 +20,27 @@ type Overlay = {
   initialY: number;
 };
 
-const slides = [
+type HeroKpi = {
+  label: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  sub?: string;
+  percent: number;
+};
+
+const slides: Array<{
+  badge: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonHref: string;
+  image: string;
+  objectPosition?: string;
+  icons: Array<{ icon: React.ElementType; label: string }>;
+  overlays: Overlay[];
+  kpis: [HeroKpi, HeroKpi, HeroKpi];
+}> = [
   {
     badge: "Hotelový systém",
     title: "Spravujte svůj hotel, penzion i apartmány z jednoho místa",
@@ -39,6 +59,11 @@ const slides = [
       { title: "Rezervace", value: "Nová objednávka", icon: CheckCircle2, color: "bg-green-500",
         position: "-bottom-6 -left-6", initialX: -24, initialY: 0 },
     ] as Overlay[],
+    kpis: [
+      { label: "Spokojenost hotelů", value: 98, suffix: "%", percent: 98 },
+      { label: "Ušetřený čas", value: 6, sub: "HOD/DEN", percent: 25 },
+      { label: "Nárůst tržeb", value: 12, prefix: "+", suffix: "%", percent: 12 },
+    ],
   },
   {
     badge: "Virtuální recepční Alfred",
@@ -58,6 +83,11 @@ const slides = [
       { title: "Platba", value: "Uhrazeno online", icon: ShieldCheck, color: "bg-indigo-600",
         position: "-bottom-6 -right-6", initialX: 24, initialY: 0 },
     ] as Overlay[],
+    kpis: [
+      { label: "Spokojenost hotelů", value: 98, suffix: "%", percent: 98 },
+      { label: "Ušetřený čas", value: 6, sub: "HOD/DEN", percent: 25 },
+      { label: "Check-inů ročně", value: 1500, suffix: "k+", percent: 85 },
+    ],
   },
   {
     badge: "Weby pro hotely",
@@ -77,6 +107,11 @@ const slides = [
       { title: "Web", value: "Dostupnost ověřena online", icon: Globe, color: "bg-primary-600",
         position: "-bottom-6 -left-6", initialX: -24, initialY: 0 },
     ] as Overlay[],
+    kpis: [
+      { label: "Přímé rezervace", value: 30, suffix: "%", percent: 30 },
+      { label: "Vyšší konverze", value: 25, suffix: "%", percent: 25 },
+      { label: "Méně provizí", value: 20, suffix: "%", percent: 20 },
+    ],
   },
   {
     badge: "Channel manager",
@@ -96,6 +131,11 @@ const slides = [
       { title: "Ceník", value: "Ceny aktualizovány všude", icon: Tag, color: "bg-primary-600",
         position: "-top-6 -left-6", initialX: -24, initialY: 0 },
     ] as Overlay[],
+    kpis: [
+      { label: "Propojených kanálů", value: 50, suffix: "+", percent: 80 },
+      { label: "Synchronizace", value: 24, sub: "hodin denně", percent: 100 },
+      { label: "Méně chyb", value: 90, suffix: "%", percent: 90 },
+    ],
   },
   {
     badge: "Automatizace hotelů",
@@ -116,6 +156,11 @@ const slides = [
       { title: "Provoz", value: "Méně ručních kroků", icon: Zap, color: "bg-primary-600",
         position: "-bottom-6 -left-6", initialX: -24, initialY: 0 },
     ] as Overlay[],
+    kpis: [
+      { label: "Ušetřený čas", value: 6, sub: "HOD/DEN", percent: 25 },
+      { label: "Automatizovaných úkonů", value: 80, suffix: "%", percent: 80 },
+      { label: "Spokojenost", value: 97, suffix: "%", percent: 97 },
+    ],
   },
   {
     badge: "Klientská linka",
@@ -135,12 +180,81 @@ const slides = [
       { title: "Telefon", value: "Zavolejte a vyřešíme to", icon: Phone, color: "bg-primary-600",
         position: "-bottom-6 -right-6", initialX: 24, initialY: 0 },
     ] as Overlay[],
+    kpis: [
+      { label: "Dostupnost", value: 7, sub: "dní v týdnu", percent: 100 },
+      { label: "Průměrná odpověď", value: 30, sub: "minut", percent: 100 },
+      { label: "Spokojených klientů", value: 4000, suffix: "+", percent: 95 },
+    ],
   },
 ];
 
 const LOGOS = ['Pytloun Hotels', 'Orea Hotels', 'Grandhotel Pupp', 'Mamaison', 'Barceló Hotels'];
 
 const SLIDE_DURATION = 8000;
+
+function HeroKpiDonut({ kpi }: { kpi: HeroKpi }) {
+  const [count, setCount] = useState(0);
+  const size = 100;
+  const strokeWidth = 8;
+  const r = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * r;
+  const strokeDashoffset = circumference * (1 - kpi.percent / 100);
+
+  useEffect(() => {
+    const duration = 1000;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - (1 - t) * (1 - t);
+      setCount(Math.round(eased * kpi.value));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [kpi.value]);
+
+  return (
+    <div className="flex flex-col items-center">
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-2">
+        {kpi.label}
+      </p>
+      <div className="relative" style={{ width: size, height: size }}>
+        <svg width={size} height={size} className="rotate-[-90deg]" aria-hidden>
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={r}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={strokeWidth}
+            className="text-slate-200"
+          />
+          <motion.circle
+            cx={size / 2}
+            cy={size / 2}
+            r={r}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            initial={{ strokeDashoffset: circumference }}
+            animate={{ strokeDashoffset }}
+            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="text-primary-600"
+          />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="text-lg font-bold font-outfit text-slate-900">
+            {kpi.prefix ?? ''}{kpi.suffix ? `${count}${kpi.suffix}` : count}
+          </span>
+          {kpi.sub && <span className="text-[10px] font-medium text-slate-500 mt-0.5">{kpi.sub}</span>}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -172,7 +286,7 @@ export function Hero() {
     <section
       data-export-section="hero"
       data-hero-slider="light"
-      className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden"
+      className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -192,10 +306,9 @@ export function Hero() {
       <div className="hidden md:block absolute top-0 right-0 -translate-y-12 translate-x-1/3 w-[800px] h-[800px] bg-primary-100/30 rounded-full blur-3xl -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-          {/* ── Left column ── */}
-          <div className="text-left z-20">
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-0 items-stretch lg:min-h-[520px] lg:h-[560px]">
+          {/* ── Left column: červený blok – stejná výška jako pravý ── */}
+          <div className="bg-primary-600 rounded-r-[3px] lg:rounded-l-[3px] lg:rounded-r-none px-6 py-12 md:px-10 md:py-16 lg:py-20 flex flex-col justify-center z-20 min-h-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentSlide}
@@ -203,36 +316,37 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20, transition: { duration: 0.12 } }}
                 transition={{ duration: 0.5 }}
+                className="text-left"
               >
-                {/* Badge with pulsing live dot */}
-                <div className="inline-flex items-center gap-2 text-sm font-medium mb-8">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 text-sm font-medium mb-6 text-white/90">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500" />
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/80 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
                   </span>
-                  <span className="text-primary-700">{slide.badge}</span>
+                  <span>{slide.badge}</span>
                 </div>
 
                 <h1
                   data-hero-title
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold font-outfit tracking-tight text-slate-900 mb-6 leading-[1.1]"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold font-outfit tracking-tight text-white mb-5 leading-[1.1] h-[2.2em] overflow-hidden line-clamp-2"
                 >
                   {slide.title}
                 </h1>
 
                 <p
                   data-hero-description
-                  className="text-lg md:text-xl text-slate-600 mb-10 max-w-xl leading-relaxed"
+                  className="text-base md:text-lg text-white/90 mb-8 leading-relaxed"
                 >
                   {slide.description}
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   {slide.buttonHref.startsWith('/') ? (
                     <Link
                       href={slide.buttonHref}
                       data-hero-primary
-                      className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center justify-center gap-2 group"
+                      className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-[3px] font-semibold text-lg hover:bg-slate-100 transition-all flex items-center justify-center gap-2 group"
                     >
                       <span data-hero-primary-text>{slide.buttonText}</span>
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -241,39 +355,47 @@ export function Hero() {
                     <a
                       href={slide.buttonHref}
                       data-hero-primary
-                      className="w-full sm:w-auto px-8 py-4 bg-primary-600 text-white rounded-[3px] font-medium text-lg hover:bg-primary-700 transition-all hover:shadow-lg hover:shadow-primary-600/20 flex items-center justify-center gap-2 group"
+                      className="w-full sm:w-auto px-8 py-4 bg-white text-black rounded-[3px] font-semibold text-lg hover:bg-slate-100 transition-all flex items-center justify-center gap-2 group"
                     >
                       <span data-hero-primary-text>{slide.buttonText}</span>
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </a>
                   )}
                   {currentSlide === 0 && (
-                    <button className="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-[3px] font-medium text-lg hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group">
-                      <div className="relative w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center group-hover:bg-primary-50 transition-colors">
-                        <span className="absolute inset-0 rounded-full border border-primary-300 animate-ping opacity-0 group-hover:opacity-60" />
-                        <Play className="w-3 h-3 text-slate-600 group-hover:text-primary-600 relative z-10" fill="currentColor" />
+                    <button className="w-full sm:w-auto px-8 py-4 bg-white/10 text-white border border-white/30 rounded-[3px] font-medium text-lg hover:bg-white/20 transition-all flex items-center justify-center gap-2 group">
+                      <div className="relative w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
+                        <Play className="w-3 h-3 text-white relative z-10" fill="currentColor" />
                       </div>
                       Přehrát video
                     </button>
                   )}
                 </div>
 
-                {/* Feature tags */}
-                <div className="mt-12 flex flex-wrap gap-6">
+                {/* Feature tags – bílé ikony a text, hover animace */}
+                <div className="mt-10 flex flex-wrap gap-5">
                   {slide.icons.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-slate-500 text-sm font-medium">
-                      <div className="p-2 bg-white rounded-[3px] border border-slate-100 shadow-sm">
-                        <item.icon className="w-4 h-4 text-primary-600" />
-                      </div>
+                    <motion.div
+                      key={idx}
+                      className="flex items-center gap-2 text-white text-sm font-medium cursor-default"
+                      whileHover={{ y: -2 }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                    >
+                      <motion.span
+                        className="flex items-center justify-center"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                      >
+                        <item.icon className="w-5 h-5 shrink-0 text-white" strokeWidth={2} />
+                      </motion.span>
                       <span>{item.label}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            {/* Progress dots */}
-            <div className="mt-12 flex gap-3 items-center">
+            {/* Progress dots – uvnitř červeného bloku */}
+            <div className="mt-10 flex gap-3 items-center">
               {slides.map((_, idx) => (
                 <button
                   key={idx}
@@ -281,14 +403,14 @@ export function Hero() {
                   aria-label={`Slide ${idx + 1}`}
                   className={`relative h-2.5 rounded-full overflow-hidden transition-all duration-300 cursor-pointer ${
                     currentSlide === idx
-                      ? 'w-20 bg-slate-200'
-                      : 'w-8 bg-slate-200 hover:bg-slate-300 hover:w-10'
+                      ? 'w-20 bg-white/30'
+                      : 'w-8 bg-white/20 hover:bg-white/25 hover:w-10'
                   }`}
                 >
                   {currentSlide === idx && (
                     <div
                       key={currentSlide}
-                      className="absolute inset-y-0 left-0 bg-primary-600 rounded-full"
+                      className="absolute inset-y-0 left-0 bg-white rounded-full"
                       style={{
                         width: '100%',
                         transformOrigin: 'left',
@@ -300,29 +422,19 @@ export function Hero() {
                 </button>
               ))}
             </div>
-
-            {/* Logo / social proof strip */}
-            <div className="mt-8 pt-8 border-t border-slate-100">
-              <p className="text-xs text-slate-400 mb-3 uppercase tracking-wider">Důvěřují nám přes 4 000 ubytovacích zařízení</p>
-              <div className="flex flex-wrap gap-x-6 gap-y-2 items-center">
-                {LOGOS.map((name) => (
-                  <span key={name} className="text-slate-300 font-semibold text-sm">{name}</span>
-                ))}
-              </div>
-            </div>
           </div>
 
-          {/* ── Right column — image ── */}
+          {/* ── Right column — bílý panel s obrázkem ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="relative lg:h-[600px] flex items-center"
+            className="relative bg-white flex flex-col px-6 lg:px-10 py-0 h-full min-h-0"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            {/* Photo */}
-            <div className="group relative w-full aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden shadow-2xl shadow-slate-200/50 z-10">
+            {/* Photo – vyplní celou výšku pravého bloku (bez aspect ratio, aby byl stejně vysoký jako levý) */}
+            <div className="group relative w-full flex-1 min-h-[260px] min-w-0 overflow-hidden rounded-[3px] shadow-2xl shadow-slate-200/50 z-10">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -363,28 +475,40 @@ export function Hero() {
                   {slide.overlays.map((overlay, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, x: overlay.initialX, y: overlay.initialY }}
-                      animate={{ opacity: 1, x: 0, y: 0 }}
-                      transition={{ delay: 0.7 + idx * 0.25, duration: 0.5, ease: 'easeOut' }}
-                      className={`absolute ${overlay.position} bg-white p-4 rounded-2xl shadow-2xl border border-slate-100 flex items-center gap-4 min-w-[220px]`}
+                      className={`absolute ${overlay.position}`}
+                      animate={{ y: [0, -6, 0] }}
+                      transition={{
+                        y: {
+                          duration: 5 + idx * 0.3,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        },
+                      }}
                     >
-                      <div className={`w-12 h-12 rounded-xl ${overlay.color} flex items-center justify-center shadow-inner shrink-0`}>
-                        <overlay.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <div
-                          data-hero-overlay-title-index={idx}
-                          className="text-[10px] uppercase tracking-wider font-bold text-slate-400"
-                        >
-                          {overlay.title}
+                      <motion.div
+                        initial={{ opacity: 0, x: overlay.initialX, y: overlay.initialY }}
+                        animate={{ opacity: 1, x: 0, y: 0 }}
+                        transition={{ delay: 0.7 + idx * 0.25, duration: 0.5, ease: 'easeOut' }}
+                        className="bg-white p-4 rounded-[3px] shadow-2xl border border-slate-100 flex items-center gap-4 min-w-[220px]"
+                      >
+                        <div className={`w-12 h-12 rounded-[3px] ${overlay.color} flex items-center justify-center shadow-inner shrink-0`}>
+                          <overlay.icon className="w-6 h-6 text-white" />
                         </div>
-                        <div
-                          data-hero-overlay-value-index={idx}
-                          className="text-base font-bold text-slate-900"
-                        >
-                          {overlay.value}
+                        <div>
+                          <div
+                            data-hero-overlay-title-index={idx}
+                            className="text-[10px] uppercase tracking-wider font-bold text-slate-400"
+                          >
+                            {overlay.title}
+                          </div>
+                          <div
+                            data-hero-overlay-value-index={idx}
+                            className="text-base font-bold text-slate-900"
+                          >
+                            {overlay.value}
+                          </div>
                         </div>
-                      </div>
+                      </motion.div>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -397,9 +521,40 @@ export function Hero() {
           </motion.div>
         </div>
 
+        {/* KPI sekce – animované grafy podle aktivního slidu */}
+        <div className="bg-white pt-12 pb-8 md:pt-14 md:pb-10">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 justify-items-center mb-12">
+              <AnimatePresence mode="wait">
+                {slide.kpis.map((kpi, idx) => (
+                  <motion.div
+                    key={`${currentSlide}-${idx}`}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.35 }}
+                    whileHover={{ y: -4, scale: 1.03 }}
+                    className="cursor-default rounded-2xl p-4 -m-4 transition-colors hover:bg-slate-50/80"
+                  >
+                    <HeroKpiDonut kpi={kpi} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+            <p className="text-center text-slate-600 font-semibold text-sm uppercase tracking-wider mb-4">
+              Důvěřují nám přes 4 000 ubytovacích zařízení
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-slate-500 font-medium text-sm">
+              {LOGOS.map((name) => (
+                <span key={name}>{name}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Scroll indicator */}
         <motion.div
-          className="flex flex-col items-center mt-16 gap-1 text-slate-400 cursor-default select-none"
+          className="flex flex-col items-center mt-12 gap-1 text-slate-400 cursor-default select-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 0.6 }}

@@ -21,8 +21,7 @@
         'Přidejte se k více jak 4 000 spokojeným klientům. Previo je nejpoužívanější hotelový systém v Česku.',
       buttonText: 'Zjistěte více',
       buttonHref: '#',
-      image:
-        'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&h=800&fit=crop&auto=format',
+      image: './exports/img/hero-1.png',
     },
     {
       badge: 'Virtuální recepční Alfred',
@@ -31,8 +30,7 @@
         'Ulehčete své recepci automatizací check-in a check-out. Nechte webovou aplikaci Alfred pracovat za Vás.',
       buttonText: 'Zjistěte více',
       buttonHref: '#',
-      image:
-        'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=800&fit=crop&auto=format',
+      image: './exports/img/hero-2.png',
     },
     {
       badge: 'Weby pro hotely',
@@ -41,8 +39,7 @@
         'Rychlý web a rezervační systém, který hostům nekomplikuje cestu. Vyšší konverze, méně provizí.',
       buttonText: 'Zjistěte více',
       buttonHref: '#',
-      image:
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&auto=format',
+      image: './exports/img/hero-3.png',
     },
     {
       badge: 'Channel manager',
@@ -51,8 +48,7 @@
         'Napojte prodejní kanály do jednoho místa a spravujte ceníky i restrikce bez přepisování. Méně chyb, méně overbookingu.',
       buttonText: 'Zjistěte více',
       buttonHref: '#',
-      image:
-        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&auto=format',
+      image: './exports/img/hero-4.png',
     },
     {
       badge: 'Automatizace hotelů',
@@ -61,8 +57,7 @@
         'Zautomatizujte rutiny, které berou čas: komunikaci, platby, check-in i doklady. Vy se soustředíte na hosty, ne na tabulky.',
       buttonText: 'Zjistěte více',
       buttonHref: '#',
-      image:
-        'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=800&fit=crop&auto=format',
+      image: './exports/img/hero-5.png',
     },
     {
       badge: 'Klientská linka',
@@ -71,8 +66,7 @@
         'Jsme k dispozici 7 dní v týdnu. Když hoří provoz, potřebujete rychlou odpověď a člověka, který zná hotely.',
       buttonText: '+420 251 613 924',
       buttonHref: 'tel:+420251613924',
-      image:
-        'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=1200&h=800&fit=crop&auto=format',
+      image: './exports/img/hero-6.png',
     },
   ];
 

@@ -15,7 +15,7 @@ export default function AlfredPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative pt-28 pb-20 md:pt-36 md:pb-28 bg-slate-50 overflow-hidden">
+      <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-slate-50 overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-50/50 via-white to-white" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -54,7 +54,7 @@ export default function AlfredPage() {
       </section>
 
       {/* Funkce */}
-      <section className="py-20 md:py-24 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           {/* Online check‑in */}
           <div className="flex flex-col md:flex-row gap-10 items-center">
@@ -178,7 +178,7 @@ export default function AlfredPage() {
       </section>
 
       {/* Statistická sekce */}
-      <section className="py-20 md:py-24 bg-slate-900 text-white">
+      <section className="py-16 md:py-20 bg-slate-900 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
           <SectionTitle as="h2" className="mb-3 text-white">
             Alfred se postaral o
